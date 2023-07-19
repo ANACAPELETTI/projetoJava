@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane maxHeight="800.0" maxWidth="1288.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1288.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainViewController">
+	<content>
+		<VBox prefHeight="39.0" prefWidth="497.0">
+			<children>
+				<MenuBar maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="497.0">
+					<menus>
+						<Menu mnemonicParsing="false" text="Classificar" />
+					</menus>
+               <padding>
+                  <Insets top="2.0" />
+               </padding>
+				</MenuBar>
+			</children>
+		</VBox>
+	</content>
+</ScrollPane>
