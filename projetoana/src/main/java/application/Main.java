@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import functions.Convolutional;
 import functions.ImageReader;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -16,11 +17,13 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import layers.ConvolutionalLayer;
 import layers.PoolingLayer;
 
 public class Main extends Application {
 	ImageReader imageReader = new ImageReader();
 	PoolingLayer poolingLayer = new PoolingLayer();
+	ConvolutionalLayer convolutionalLayer = new ConvolutionalLayer();
 	private static Scene mainScene;
 	
 
@@ -58,20 +61,44 @@ public class Main extends Application {
 			
 			//exemplo de matriz 2D representando a imagem
 			float[][] imageMatriz = {
-                    {2, 4, 1, 5},
-                    {6, 8, 3, 2},
-                    {9, 7, 2, 1},
-                    {8, 5, 3, 6}
+		            {10, 20, 30, 40, 50},
+		            {60, 70, 80, 90, 100},
+		            {110, 120, 130, 140, 150},
+		            {160, 170, 180, 190, 200},
+		            {210, 220, 230, 240, 250}
 		        };
+
+		    float[][] kernel = {
+		            {1, 1, 1},
+		            {1, 1, 1},
+		            {1, 1, 1}
+		    };
 			
 			 //tamanho do pooling quadrado (nesse caso, 2x2)
 	        int poolSize = 2;
 	        
+	        
+	        /** CONVOLUÇÃO **/
+	        //chama a função de convolução, passando como parâmetro: 
+	        //tipo de convolução, matriz da imagem e o kernel a ser utilizado
+	        float[][] convolutionalMatrix = convolutionalLayer.ConvolutionalLayer(1, imageMatriz, kernel);
+	        
+	        System.out.println("\n Convolução: \n");
+			// Exibir a matriz resultante após max-pooling
+	        for (int i = 0; i < convolutionalMatrix.length; i++) {
+	            for (int j = 0; j < convolutionalMatrix[0].length; j++) {
+	                System.out.print(convolutionalMatrix[i][j] + " ");
+	            }
+	            System.out.println("\n");
+	        }
+	        
+	        /** POOLING **/
+	        /* 
 	        //chama a função de pooling, passando como parâmetro: 
 	        //tipo do pooling, matriz da imagem e o tamanho do pooling
 	        float[][] pooledMatrix = poolingLayer.PoolingLayer(3, imageMatriz, poolSize);
 	        
-	        System.out.println("\n sub: \n");
+	        System.out.println("\n Pooling: \n");
 			// Exibir a matriz resultante após max-pooling
 	        for (int i = 0; i < pooledMatrix.length; i++) {
 	            for (int j = 0; j < pooledMatrix[0].length; j++) {
@@ -79,6 +106,7 @@ public class Main extends Application {
 	            }
 	            System.out.println("\n");
 	        }
+	        */
 
 		} catch (IOException e) {
 			e.printStackTrace();
