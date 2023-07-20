@@ -1,7 +1,6 @@
 package functions;
 
 public class subMatrix {
-	//Função do retornar as submatrizes
     public float[][] subMatrix(float tamanhoMatrizEntrada[][], int tamanho, int linhaInicio, int colunaInicio) {
         //inicializa a matriz resultante
     	int rows = tamanhoMatrizEntrada.length;

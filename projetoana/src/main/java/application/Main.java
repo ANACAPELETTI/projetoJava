@@ -69,7 +69,7 @@ public class Main extends Application {
 	        
 	        //chama a função de pooling, passando como parâmetro: 
 	        //tipo do pooling, matriz da imagem e o tamanho do pooling
-	        float[][] pooledMatrix = poolingLayer.PoolingLayer(4, imageMatriz, poolSize);
+	        float[][] pooledMatrix = poolingLayer.PoolingLayer(3, imageMatriz, poolSize);
 	        
 	        System.out.println("\n sub: \n");
 			// Exibir a matriz resultante após max-pooling
