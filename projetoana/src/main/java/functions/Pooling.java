@@ -16,15 +16,14 @@ public class Pooling {
         float[][] pooledMatrix = new float[pooledRows][pooledCols];
         
         //cria a matriz para a submatriz
-        float[][] submatriz = new float[tamanhoPooling][tamanhoPooling];
-        //pooledMatrix = subMat.subMatrix(tamanhoMatrizEntrada, tamanhoPooling, 0, 1);
+        float[][] submatriz = new float[pooledRows][pooledCols];
         
        	for (int i = 0; i < pooledRows; i++) {
        		for (int j = 0; j < pooledCols; j++) {
        			submatriz = subMat.subMatrix(tamanhoMatrizEntrada, tamanhoPooling, i, j); //submatriz
        			float minVal = 256;
-                for (int x = i; x < tamanhoPooling; x++) {
-                    for (int y = j; y < tamanhoPooling; y++) {
+                for (int x = 0; x < tamanhoPooling; x++) {
+                    for (int y = 0; y < tamanhoPooling; y++) {
                         if (submatriz[x][y] < minVal) {
                             minVal = submatriz[x][y];
                         }
