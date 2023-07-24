@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
 
 public class ImageReader {
 	public void imageReader() {
-		
 		Image image = new Image("/images/casa.png");
 		PixelReader reader = image.getPixelReader();
 		int height = (int) image.getHeight();
@@ -32,7 +31,6 @@ public class ImageReader {
 			matrixImageRed.add(linhaRed);
 			matrixImageGreen.add(linhaGreen);
 			matrixImageBlue.add(linhaBlue);
-			
 		}
 		//System.out.println(matrixImageRed);
 	}

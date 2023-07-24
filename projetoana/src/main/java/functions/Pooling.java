@@ -13,7 +13,6 @@ public class Pooling {
         int pooledCols = (tamanhoMatrizEntrada[0].length - tamanhoPooling) + 1;
         
         float[][] pooledMatrix = new float[pooledRows][pooledCols]; //inicializa a matriz resultante
-        
         float[][] submatriz = new float[pooledRows][pooledCols]; //cria a matriz para a submatriz
         
        	for (int i = 0; i < pooledRows; i++) {
