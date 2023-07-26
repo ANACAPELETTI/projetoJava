@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import functions.Convolutional;
+import Feedfoward.Feedfoward;
 import functions.ImageReader;
 import functions.subMatrix;
 import javafx.animation.FadeTransition;
@@ -29,6 +29,7 @@ public class Main extends Application {
 	ConvolutionalLayer convolutionalLayer = new ConvolutionalLayer();
 	private static Scene mainScene;
 	subMatrix subMat = new subMatrix();
+	Feedfoward feedfoward = new Feedfoward();
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -65,24 +66,28 @@ public class Main extends Application {
 			};
 
 			float[][] kernel = { 
-					{ 1, 1}, 
-					{ 1, 1}
+					{ 1, 1 }, 
+					{ 1, 1 }
 			};
 			
 			float[][] kernel1 = { 
-					{ 0, -1}, 
-					{ -1, 5}
+					{ 0, -1 }, 
+					{ -1, 5 }
 			};
 			
 			float[][] kernel2 = { 
-					{ 1, 0}, 
-					{ 0, 1} 
+					{ 1, 0 }, 
+					{ 0, 1 } 
 			};
 			
 			List<float[][]> listaKernels = Arrays.asList(kernel, kernel1, kernel2);
 			
 			// tamanho do pooling quadrado (nesse caso, 2x2)
 			int poolSize = 2;
+			
+			float resultadoFinal = feedfoward.feedfoward(imageMatriz, listaKernels, poolSize, poolSize);
+			
+			System.out.println("Resultado final: " + resultadoFinal);
 
 			/* Convolução */
 			/*
@@ -100,7 +105,7 @@ public class Main extends Application {
 			  });
 			*/
 			/** POOLING **/
-			
+			/*
 			// chama a função de pooling, passando como parâmetro:
 			// tipo do pooling, matriz da imagem e o tamanho do pooling
 			float[][] pooledMatrix;
@@ -115,6 +120,7 @@ public class Main extends Application {
 				}
 				System.out.println("------");
 			}
+			*/
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
