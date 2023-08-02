@@ -5,9 +5,11 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import Feedfoward.Feedfoward;
+import Feedfoward.feedfoward2;
 import functions.ImageReader;
 import functions.subMatrix;
 import javafx.animation.FadeTransition;
@@ -30,6 +32,7 @@ public class Main extends Application {
 	private static Scene mainScene;
 	subMatrix subMat = new subMatrix();
 	Feedfoward feedfoward = new Feedfoward();
+	feedfoward2 feedfoward2 = new feedfoward2();
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -65,6 +68,9 @@ public class Main extends Application {
                     {210, 220, 230, 240, 250}
 			};
 
+			List<float[][]> listImageMatriz = new ArrayList<float[][]>();
+			listImageMatriz.add(imageMatriz);
+			
 			float[][] kernel = { 
 					{ 1, 1 }, 
 					{ 1, 1 }
@@ -81,11 +87,25 @@ public class Main extends Application {
 			};
 			
 			List<float[][]> listaKernels = Arrays.asList(kernel, kernel1, kernel2);
+			List<float[][]> listaKernels2 = Arrays.asList(kernel1, kernel2);
+			List<List<float[][]>> listaListaKernels = Arrays.asList(listaKernels, listaKernels2);
 			
 			// tamanho do pooling quadrado (nesse caso, 2x2)
 			int poolSize = 2;
+			int[] pooling1 = {1, 2}; //pooling mínimo, com tamanho 2
+			int[] pooling2 = {2, 2}; //pooling médio, com tamanho 2
+			int[] pooling3 = {3, 2}; //pooling máximo, com tamanho 2
 			
-			float resultadoFinal = feedfoward.feedfoward(imageMatriz, listaKernels, poolSize, poolSize);
+			//List<int[]> listaPoolings = Arrays.asList(pooling1,pooling3);
+			//List<String> list = new LinkedList<>(Arrays.asList(pooling1, ));
+			List<int[]> listaPoolings = new ArrayList<int[]>(Arrays.asList(pooling1, pooling3));
+			
+			//resultado final: 6744.0
+			
+			List<Integer> listaOrdemOperacoes = new ArrayList<Integer>(Arrays.asList(0,1,0,1));
+			
+			
+			float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz, listaKernels, listaPoolings);
 			
 			System.out.println("Resultado final: " + resultadoFinal);
 
