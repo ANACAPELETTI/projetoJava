@@ -87,8 +87,8 @@ public class Main extends Application {
 			};
 			
 			List<float[][]> listaKernels = Arrays.asList(kernel, kernel1, kernel2);
-			List<float[][]> listaKernels2 = Arrays.asList(kernel1, kernel2);
-			List<List<float[][]>> listaListaKernels = Arrays.asList(listaKernels, listaKernels2);
+			//List<float[][]> listaKernels2 = Arrays.asList(kernel1, kernel2);
+			//List<List<float[][]>> listaListaKernels = Arrays.asList(listaKernels, listaKernels2);
 			
 			// tamanho do pooling quadrado (nesse caso, 2x2)
 			int poolSize = 2;
@@ -105,7 +105,7 @@ public class Main extends Application {
 			List<Integer> listaOrdemOperacoes = new ArrayList<Integer>(Arrays.asList(0,1,0,1));
 			
 			
-			float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz, listaKernels, listaPoolings);
+			float resultadoFinal = feedfoward2.feedfoward(listaOrdemOperacoes, listImageMatriz, listaKernels, listaPoolings);
 			
 			System.out.println("Resultado final: " + resultadoFinal);
 

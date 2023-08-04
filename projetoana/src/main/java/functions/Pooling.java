@@ -47,7 +47,7 @@ public class Pooling {
        	for (int i = 0; i < pooledRows; i++) {
        		for (int j = 0; j < pooledCols; j++) {
        			submatriz = subMat.subMatrix(tamanhoMatrizEntrada, tamanhoPooling, i, j); //retorna todas as submatrizes
-       			float minVal = 256;
+       			float minVal = Float.MAX_VALUE;
                 for (int x = 0; x < tamanhoPooling; x++) {
                     for (int y = 0; y < tamanhoPooling; y++) {
                         if (submatriz[x][y] < minVal) {
@@ -104,7 +104,8 @@ public class Pooling {
        	for (int i = 0; i < pooledRows; i++) {
        		for (int j = 0; j < pooledCols; j++) {
        			submatriz = subMat.subMatrix(tamanhoMatrizEntrada, tamanhoPooling, i, j); //retorna todas as submatrizes
-       			float maxVal = -1;
+       			float maxVal = Float.MIN_VALUE;
+       			System.out.println("\n Float Min: \n"+maxVal);
                 for (int x = 0; x < tamanhoPooling; x++) {
                     for (int y = 0; y < tamanhoPooling; y++) {
                     	 if (submatriz[x][y] > maxVal) {

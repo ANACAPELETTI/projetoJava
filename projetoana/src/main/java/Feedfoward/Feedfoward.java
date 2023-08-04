@@ -20,7 +20,14 @@ public class Feedfoward {
 			pooledMatrix = poolingLayer.PoolingLayer(listPoolings.get(0)[0], //pega o tipo de pooling do primeiro pooling, nesse caso, pooling mínimo 
 					convolutionalMatrix.get(x), //pega cada uma das matrizes de retorno da convolutionalMatrix, retorna uma nova matriz com o pooling mínimo
 					listPoolings.get(0)[1]); //pegando o tamanho do pooling, no primeiro pooling da lista
-
+			System.out.println("\n Pooling 1: \n");
+			for (int i = 0; i < pooledMatrix.length; i++) {
+				for (int j = 0; j < pooledMatrix[0].length; j++) {
+					System.out.print(pooledMatrix[i][j] + " ");
+				}
+				System.out.println("\n");
+			}
+			System.out.println("------");
 			convolutionalMatrix2 = convolutionalLayer.ConvolutionalLayer(pooledMatrix, kernelsConvolutional);
 
 			System.out.println("\n Convolução 2: \n"); // Exibir a matriz resultante após max-pooling 
@@ -38,21 +45,21 @@ public class Feedfoward {
 						convolutionalMatrix2.get(x), //pega cada uma das matrizes de retorno da convolutionalMatrix2, retorna uma nova matriz com o pooling máximo
 						listPoolings.get(1)[1]); //pegando o tamanho do pooling, do segundo pooling da lista
 				
-				/*System.out.println("\n Pooling 2: \n");
-					for (int i = 0; i < pooledMatrix2.length; i++) {
-						for (int j = 0; j < pooledMatrix2[0].length; j++) {
-							System.out.print(pooledMatrix2[i][j] + " ");
-						}
-						System.out.println("\n");
+				System.out.println("\n Pooling 2: \n");
+				for (int i = 0; i < pooledMatrix2.length; i++) {
+					for (int j = 0; j < pooledMatrix2[0].length; j++) {
+						System.out.print(pooledMatrix2[i][j] + " ");
 					}
-					System.out.println("------");
-				*/
+					System.out.println("\n");
+				}
+				System.out.println("------");
+				
 				//System.out.println("Sum: \n" + sum);
 				for (int i = 0; i < pooledMatrix2.length; i++) {
 					//System.out.println("Sum: \n" + sum);
 					for (int j = 0; j < pooledMatrix2[0].length; j++) {
 						sum += pooledMatrix2[i][j];
-						//System.out.println("Sum: \n" + sum);
+						System.out.println("Sum: \n" + sum);
 					}
 					 System.out.println("\n"); 
 				}

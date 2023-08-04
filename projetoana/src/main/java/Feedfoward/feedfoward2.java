@@ -17,6 +17,7 @@ public class feedfoward2 {
 		List<float[][]> lista = new ArrayList<float[][]>();
 		List<float[][]> auxiliar = new ArrayList<float[][]>();
 		float[][] pooledMatrix;
+		List<List<float[][]>> lista2 = new ArrayList<List<float[][]>>();
 		
 		for (int w = 0; w < ordem.size(); w++) {
 			if(ordem.get(w) == 0) { //convolução
@@ -29,10 +30,11 @@ public class feedfoward2 {
 					lista = new ArrayList<float[][]>(); //cria novamente o objeto 'lista' para que possamos utilizá-lo
 					for (int x = 0; x < auxiliar.size(); x++) {
 						System.out.println("Auxiliar get: \n" + auxiliar.get(x));
-						lista = convolutionalLayer.ConvolutionalLayer(auxiliar.get(0), kernelsConvolutional);
+						lista = convolutionalLayer.ConvolutionalLayer(auxiliar.get(x), kernelsConvolutional);
+						lista2.add(lista);
 					}
 					System.out.println("\n Convolução 2: \n"); // Exibir a matriz resultante após max-pooling
-					  lista.forEach(a -> {
+					  lista2.forEach(b -> { b.forEach(a -> {
 						  for (int i = 0; i < a.length; i++) { 
 							  for (int j  = 0; j < a[0].length; j++) {
 								  System.out.print(a[i][j] + " "); 
@@ -40,6 +42,7 @@ public class feedfoward2 {
 							  System.out.println("\n"); 
 							}
 						  System.out.println("-------");
+					  	});
 					  });
 					System.out.println("Tamanho convolucional: \n" + lista.size());
 					auxiliar = null; //apaga o objeto 'auxiliar' original 
@@ -49,15 +52,31 @@ public class feedfoward2 {
 			} else if (ordem.get(w) == 1) { //pooling
 				System.out.println("Pooling");
 				if(!auxiliar.isEmpty()) { 
+					System.out.println("\nLista 2 tamanho: \n"+lista2.size());
 					lista = null; //apaga o objeto 'lista' original 
 					lista = new ArrayList<float[][]>(); //cria novamente o objeto 'lista' para que possamos utilizá-lo
+					lista2 = null; //apaga o objeto 'lista' original 
+					lista2 = new ArrayList<List<float[][]>>(); //cria novamente o objeto 'lista' para que possamos utilizá-lo
+					System.out.println("\nAuxiliar tamanho: \n"+auxiliar.size());
+					
 					for (int x = 0; x < auxiliar.size(); x++) {
 						pooledMatrix = poolingLayer.PoolingLayer(listPoolings.get(0)[0], //pega o tipo de pooling do primeiro pooling, nesse caso, pooling mínimo 
 								auxiliar.get(x), //pega cada uma das matrizes de retorno da convolutionalMatrix, retorna uma nova matriz com o pooling mínimo
 								listPoolings.get(0)[1]); //pegando o tamanho do pooling, no primeiro pooling da lista
 						lista.add(pooledMatrix); //adiciona as novas matrizes na 'lista'	
+						lista2.add(lista);
 						
-					}
+						
+						System.out.println("\n Pooling: \n");
+						
+							for (int i = 0; i < pooledMatrix.length; i++) {
+								for (int j = 0; j < pooledMatrix[0].length; j++) {
+									System.out.print(pooledMatrix[i][j] + " ");
+								}
+								System.out.println("\n");
+							}
+							System.out.println("------");
+						}
 					removeFirst(listPoolings);
 					auxiliar = null; //apaga o objeto 'auxiliar' original 
 					auxiliar = lista; //cópia de segurança
@@ -72,7 +91,7 @@ public class feedfoward2 {
 		}
 		
         System.out.println("Lista: \n");
-		  lista.forEach(a -> {
+        lista2.forEach(b -> { b.forEach(a -> {
 			  for (int i = 0; i < a.length; i++) { 
 				  for (int j  = 0; j < a[0].length; j++) {
 					  System.out.print(a[i][j] + " "); 
@@ -80,6 +99,7 @@ public class feedfoward2 {
 				  System.out.println("\n"); 
 				}
 			  System.out.println("-------");
+		  	});
 		  });
 		
 		/*ordem.forEach(operacao -> {
