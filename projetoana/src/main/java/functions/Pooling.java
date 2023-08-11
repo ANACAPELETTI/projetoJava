@@ -1,7 +1,5 @@
 package functions;
 
-import java.util.Iterator;
-import java.util.List;
 import functions.subMatrix;
 
 public class Pooling {
@@ -105,7 +103,6 @@ public class Pooling {
        		for (int j = 0; j < pooledCols; j++) {
        			submatriz = subMat.subMatrix(tamanhoMatrizEntrada, tamanhoPooling, i, j); //retorna todas as submatrizes
        			float maxVal = Float.MIN_VALUE;
-       			System.out.println("\n Float Min: \n"+maxVal);
                 for (int x = 0; x < tamanhoPooling; x++) {
                     for (int y = 0; y < tamanhoPooling; y++) {
                     	 if (submatriz[x][y] > maxVal) {

@@ -1,15 +1,10 @@
 package application;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-
 import Feedfoward.Feedfoward;
-import Feedfoward.feedfoward2;
 import functions.ImageReader;
 import functions.subMatrix;
 import javafx.animation.FadeTransition;
@@ -17,9 +12,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import layers.ConvolutionalLayer;
@@ -32,7 +24,6 @@ public class Main extends Application {
 	private static Scene mainScene;
 	subMatrix subMat = new subMatrix();
 	Feedfoward feedfoward = new Feedfoward();
-	feedfoward2 feedfoward2 = new feedfoward2();
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -87,60 +78,22 @@ public class Main extends Application {
 			};
 			
 			List<float[][]> listaKernels = Arrays.asList(kernel, kernel1, kernel2);
-			//List<float[][]> listaKernels2 = Arrays.asList(kernel1, kernel2);
-			//List<List<float[][]>> listaListaKernels = Arrays.asList(listaKernels, listaKernels2);
+			List<float[][]> listaKernels2 = Arrays.asList(kernel1, kernel2);
+			List<List<float[][]>> listaListaKernels = new ArrayList<List<float[][]>>();
+			listaListaKernels.add(listaKernels);
+			listaListaKernels.add(listaKernels2);
 			
-			// tamanho do pooling quadrado (nesse caso, 2x2)
-			int poolSize = 2;
 			int[] pooling1 = {1, 2}; //pooling mínimo, com tamanho 2
-			int[] pooling2 = {2, 2}; //pooling médio, com tamanho 2
+			int[] pooling2 = {2, 1}; //pooling médio, com tamanho 1
 			int[] pooling3 = {3, 2}; //pooling máximo, com tamanho 2
 			
-			//List<int[]> listaPoolings = Arrays.asList(pooling1,pooling3);
-			//List<String> list = new LinkedList<>(Arrays.asList(pooling1, ));
 			List<int[]> listaPoolings = new ArrayList<int[]>(Arrays.asList(pooling1, pooling3));
 			
-			//resultado final: 6744.0
+			List<Integer> listaOrdemOperacoes = new ArrayList<Integer>(Arrays.asList(1,0,1,0));
 			
-			List<Integer> listaOrdemOperacoes = new ArrayList<Integer>(Arrays.asList(0,1,0,1));
-			
-			
-			float resultadoFinal = feedfoward2.feedfoward(listaOrdemOperacoes, listImageMatriz, listaKernels, listaPoolings);
+			float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz, listaListaKernels, listaPoolings);
 			
 			System.out.println("Resultado final: " + resultadoFinal);
-
-			/* Convolução */
-			/*
-			List<float[][]> convolutionalMatrix = convolutionalLayer.ConvolutionalLayer(imageMatriz, listaKernels);
-			  
-			  System.out.println("\n Convolução: \n"); // Exibir a matriz resultante após max-pooling 
-			  convolutionalMatrix.forEach(a -> {
-				  for (int i = 0; i < a.length; i++) { 
-					  for (int j  = 0; j < a[0].length; j++) {
-						  System.out.print(a[i][j] + " "); 
-					  }
-					  System.out.println("\n"); 
-					}
-				  System.out.println("-------");
-			  });
-			*/
-			/** POOLING **/
-			/*
-			// chama a função de pooling, passando como parâmetro:
-			// tipo do pooling, matriz da imagem e o tamanho do pooling
-			float[][] pooledMatrix;
-			System.out.println("\n Pooling: \n");
-			for (int x = 1; x < 4; x++) {
-				pooledMatrix = poolingLayer.PoolingLayer(x, imageMatriz, poolSize);
-				for (int i = 0; i < pooledMatrix.length; i++) {
-					for (int j = 0; j < pooledMatrix[0].length; j++) {
-						System.out.print(pooledMatrix[i][j] + " ");
-					}
-					System.out.println("\n");
-				}
-				System.out.println("------");
-			}
-			*/
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -7,9 +7,11 @@ import functions.Convolutional;
 
 public class ConvolutionalLayer {
 	Convolutional convolutional = new Convolutional();
-	public List<float[][]> ConvolutionalLayer(float tamanhoMatrizEntrada[][], List<float[][]> kernelConvolutional) {
+	public List<float[][]> ConvolutionalLayer(List<float[][]> tamanhoMatrizEntrada, List<float[][]> kernelConvolutional) {
 		List<float[][]> convolutionalMatrix = new ArrayList<float[][]>();
-		kernelConvolutional.forEach(a -> convolutionalMatrix.add(convolutional.desfoque(tamanhoMatrizEntrada, a)));
+		tamanhoMatrizEntrada.forEach(b -> {
+			kernelConvolutional.forEach(a -> convolutionalMatrix.add(convolutional.desfoque(b, a)));
+		});
 		return convolutionalMatrix;
 	}
 }

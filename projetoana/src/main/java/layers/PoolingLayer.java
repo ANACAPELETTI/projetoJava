@@ -10,8 +10,7 @@ import javafx.scene.paint.Color;
 
 public class PoolingLayer {
 	Pooling pooling = new Pooling();
-	float[][] pooledMatrix;
-	public float[][] PoolingLayer(int tipoPooling, float tamanhoMatrizEntrada[][], int tamanhoPooling) {
+	public List<float[][]> PoolingLayer(int tipoPooling, List<float[][]> tamanhoMatrizEntrada, int tamanhoPooling) {
 		/*
 		 * Tipo Pooling = 
 		 * 1 = Pooling mínimo
@@ -19,18 +18,27 @@ public class PoolingLayer {
 		 * 3 = Pooling máximo 
 		 * 4 = Teste da classe subMatrix
 		 */
+		List<float[][]> pooledMatrix = new ArrayList<float[][]>();
 		switch (tipoPooling) {
 			case 1:
-				pooledMatrix = pooling.poolingMin(tamanhoMatrizEntrada, tamanhoPooling);
+				tamanhoMatrizEntrada.forEach(a -> {
+					pooledMatrix.add(pooling.poolingMin(a, tamanhoPooling));
+				});
 				return pooledMatrix;
 			case 2:
-				pooledMatrix = pooling.poolingMed(tamanhoMatrizEntrada, tamanhoPooling);
+				tamanhoMatrizEntrada.forEach(a -> {
+					pooledMatrix.add(pooling.poolingMed(a, tamanhoPooling));
+				});
 				return pooledMatrix;
 			case 3:
-				pooledMatrix = pooling.poolingMax(tamanhoMatrizEntrada, tamanhoPooling);
+				tamanhoMatrizEntrada.forEach(a -> {
+					pooledMatrix.add(pooling.poolingMax(a, tamanhoPooling));
+				});
 				return pooledMatrix;
 			case 4:
-				pooledMatrix = pooling.teste(tamanhoMatrizEntrada, tamanhoPooling);
+				tamanhoMatrizEntrada.forEach(a -> {
+					pooledMatrix.add(pooling.teste(a, tamanhoPooling));
+				});
 				return pooledMatrix;
 			default:
 				break;
