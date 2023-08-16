@@ -28,7 +28,11 @@ public class Feedfoward {
 			if(ordem.get(w) == 0) { //convolução
 				System.out.println("Convolução");
 				listFeedfoward.add(convolutionalLayer.ConvolutionalLayer(listFeedfoward.get(listFeedfoward.size()-1), kernelsConvolutional.get(0)));
-				kernelsConvolutional.remove(0);
+				System.out.println("Vai remover?");
+				if (!kernelsConvolutional.isEmpty() && kernelsConvolutional.size() > 0) {
+					kernelsConvolutional.remove(0);
+					System.out.println("Removeu");
+		        }
 			} else if (ordem.get(w) == 1) { //pooling
 				System.out.println("Pooling");
 				listFeedfoward.add(poolingLayer.PoolingLayer(listPoolings.get(0)[0], listFeedfoward.get(listFeedfoward.size()-1), listPoolings.get(0)[1]));
