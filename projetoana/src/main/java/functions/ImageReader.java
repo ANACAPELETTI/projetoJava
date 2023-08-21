@@ -8,8 +8,8 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
 
 public class ImageReader {
-	public void imageReader() {
-		Image image = new Image("/images/casa.png");
+	public float[][] imageReader() {
+		Image image = new Image("/images/A1.png");
 		PixelReader reader = image.getPixelReader();
 		int height = (int) image.getHeight();
 		int width = (int) image.getWidth();
@@ -32,7 +32,19 @@ public class ImageReader {
 			matrixImageGreen.add(linhaGreen);
 			matrixImageBlue.add(linhaBlue);
 		}
-		//System.out.println(matrixImageRed);
+		return listaParaMatriz(matrixImageBlue);
+	}
+	
+	public float[][] listaParaMatriz(List<List<Float>> listaRGB) {
+		int height = (int) listaRGB.size();
+		int width = (int) listaRGB.get(0).size();
+		float[][] matrizRGB = new float[height][width];
+		for(int i = 0 ; i < height; i++) {
+			for(int j = 0 ; j < width; j++) {
+				matrizRGB[i][j] = listaRGB.get(j).get(i);
+			}
+		}
+		return matrizRGB;
 	}
 }
 

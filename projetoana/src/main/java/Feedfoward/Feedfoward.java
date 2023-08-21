@@ -11,7 +11,6 @@ public class Feedfoward {
 	
 	public float feedfoward(List<Integer> ordem, List<float[][]> matrizEntrada, 
 			List<List<float[][]>> kernelsConvolutional, List<int[]> listPoolings) {
-		
 		float sum = 0;
 		List<List<float[][]>> listFeedfoward = new ArrayList<List<float[][]>>();
 		
@@ -28,10 +27,8 @@ public class Feedfoward {
 			if(ordem.get(w) == 0) { //convolução
 				System.out.println("Convolução");
 				listFeedfoward.add(convolutionalLayer.ConvolutionalLayer(listFeedfoward.get(listFeedfoward.size()-1), kernelsConvolutional.get(0)));
-				System.out.println("Vai remover?");
 				if (!kernelsConvolutional.isEmpty() && kernelsConvolutional.size() > 0) {
 					kernelsConvolutional.remove(0);
-					System.out.println("Removeu");
 		        }
 			} else if (ordem.get(w) == 1) { //pooling
 				System.out.println("Pooling");
@@ -61,4 +58,44 @@ public class Feedfoward {
         	listPoolings.remove(0);
         }
     }
+	
+	public boolean verificaTamanho (List<Integer> ordem, List<float[][]> matrizEntrada, 
+			List<List<float[][]>> kernelsConvolutional, List<int[]> listPoolings) {
+		int tamanhoInicial = 0, tamanhoFinal = 0;
+		for (int w = 0; w < ordem.size(); w++) {
+			if(ordem.get(w) == 0) { //convolução
+				if (tamanhoFinal == 0) {
+					tamanhoInicial = (matrizEntrada.get(0).length - kernelsConvolutional.get(0).get(0).length) + 1;
+					tamanhoFinal = tamanhoInicial;
+					if (!kernelsConvolutional.isEmpty() && kernelsConvolutional.size() > 0) {
+						kernelsConvolutional.remove(0);
+			        }
+				} else {
+					tamanhoFinal = (tamanhoInicial - kernelsConvolutional.get(0).get(0).length) + 1;
+					if (!kernelsConvolutional.isEmpty() && kernelsConvolutional.size() > 0) {
+						kernelsConvolutional.remove(0);
+			        }
+					tamanhoInicial = tamanhoFinal;
+				}
+			} else if (ordem.get(w) == 1) { //pooling
+				if (tamanhoFinal == 0) {
+					tamanhoInicial = (matrizEntrada.get(0).length - listPoolings.get(0).length) + 1;
+					tamanhoFinal = tamanhoInicial;
+					removeFirst(listPoolings);	
+				} else {
+					tamanhoFinal = (tamanhoInicial - listPoolings.get(0)[1]) + 1;
+					removeFirst(listPoolings);	
+					tamanhoInicial = tamanhoFinal;
+				}
+			} else { 
+				System.out.println("Algo errado");
+			}
+		}
+		System.out.println("Tamanho final mesmo: \n" + tamanhoFinal);
+		if (tamanhoFinal > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
