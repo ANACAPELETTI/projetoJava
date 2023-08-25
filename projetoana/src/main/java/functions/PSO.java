@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-import Feedfoward.Feedfoward;
+import feedfoward.Feedfoward;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -53,7 +52,7 @@ public class PSO extends Application {
 			//float[][] imageMatriz = imageReader.imageReader();
 
 			// exemplo de matriz 2D representando a imagem
-			float[][] imageMatriz = {                     
+			float[][] imageMatriz0 = {                     
 					{ 210,  35, 101, 174,  51,  38,  92, 213,  40, 115 },
 					{ 137,  86, 140,  28,  72,  31,  95, 123, 227, 173 },
 					{ 201,  65, 164, 142, 180, 247, 139,  44, 198, 207 },
@@ -65,6 +64,14 @@ public class PSO extends Application {
 					{ 119, 252,  14, 236, 110, 157, 103,  43, 133,  89 },
 					{  16,  80, 207,  48, 146,  61,  15,  19, 238,  54 }
 			};
+			
+			float[][] imageMatriz = new float[10][10];
+			
+			for (int x = 0; x < 10; x++) {
+				for (int j = 0; j < 10; j++) {
+					imageMatriz[x][j] = imageMatriz0[x][j]/255; 
+				}
+			}
 
 			List<float[][]> listImageMatriz = new ArrayList<float[][]>();
 			listImageMatriz.add(imageMatriz);
@@ -97,9 +104,11 @@ public class PSO extends Application {
 			listaListaKernels.add(listaKernels);
 			listaListaKernels.add(listaKernels2);
 			
-			List<List<float[][]>> listaListaKernels2 = new ArrayList<List<float[][]>>();
-			listaListaKernels2.add(listaKernels);
-			listaListaKernels2.add(listaKernels2);
+			List<List<float[][]>> listaListaKernels2 = criaListaListaKernels();
+			
+			//List<List<float[][]>> listaListaKernels2 = new ArrayList<List<float[][]>>();
+			//listaListaKernels2.add(listaKernels);
+			//listaListaKernels2.add(listaKernels2);
 			
 			int[] pooling1 = {1, 2}; //pooling mínimo, com tamanho 2
 			int[] pooling2 = {2, 2}; //pooling médio, com tamanho 2
@@ -142,9 +151,9 @@ public class PSO extends Application {
 	}
 
 	public static List<List<float[][]>> criaListaListaKernels () {
-		int numListasMatrizes = 5; // Número de listas de matrizes
-		int numMatrizesPorLista = 10; // Número de matrizes por lista
-		int tamMatrizes = 10; // Tamanho das matrizes (tamMatrizes x tamMatrizes)
+		int numListasMatrizes = 2; // Número de listas de matrizes
+		int numMatrizesPorLista = 3; // Número de matrizes por lista
+		int tamMatrizes = 4; // Tamanho das matrizes (tamMatrizes x tamMatrizes)
 
 		List<List<float[][]>> listaListaKernels = new ArrayList<List<float[][]>>();
 
@@ -152,11 +161,11 @@ public class PSO extends Application {
 
 		for (int x = 0; x < numListasMatrizes; x++) {
 			List<float[][]> listaKernels = new ArrayList<>();
-			for (float j = 0; j < numMatrizesPorLista; j++) {
+			for (int j = 0; j < numMatrizesPorLista; j++) {
 				float[][] matrix = new float[tamMatrizes][tamMatrizes];
 				for (int k = 0; k < tamMatrizes; k++) {
 					for (int l = 0; l < tamMatrizes; l++) {
-						matrix[k][l] = random.nextFloat(26); // Número aleatório entre 0 e 25
+						matrix[k][l] = random.nextFloat() * 2 - 1; // Número aleatório
 					}
 				}
 				listaKernels.add(matrix);

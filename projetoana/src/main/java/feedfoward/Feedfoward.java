@@ -1,4 +1,4 @@
-package Feedfoward;
+package feedfoward;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +62,7 @@ public class Feedfoward {
 	public boolean verificaTamanho (List<Integer> ordem, List<float[][]> matrizEntrada, 
 			List<List<float[][]>> kernelsConvolutional, List<int[]> listPoolings) {
 		int tamanhoInicial = 0, tamanhoFinal = 0;
+		int tamanhoEntrada = matrizEntrada.size(), tamanhoSaida = 0;
 		for (int w = 0; w < ordem.size(); w++) {
 			if(ordem.get(w) == 0) { //convolução
 				if (tamanhoFinal == 0) {
@@ -98,4 +99,27 @@ public class Feedfoward {
 			return false;
 		}
 	}
+	
+	/*public boolean verificaTamanho (List<Integer> ordem, List<float[][]> matrizEntrada, 
+			List<List<float[][]>> kernelsConvolutional, List<int[]> listPoolings) {
+		int tamanhoEntrada = matrizEntrada.get(0).length, tamanhoSaida = 0;
+		int convolucao = 0, pooling = 0;
+		for (int w = 0; w < ordem.size(); w++) {
+			if(ordem.get(w) == 0) { //convolução
+				if () {
+					
+				}
+			} else if (ordem.get(w) == 1) { //pooling
+
+			} else { 
+				System.out.println("Algo errado");
+			}
+		}
+		System.out.println("Tamanho final mesmo: \n" + tamanhoFinal);
+		if (tamanhoFinal > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}*/
 }
