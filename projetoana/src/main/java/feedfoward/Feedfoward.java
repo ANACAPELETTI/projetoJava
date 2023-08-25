@@ -61,65 +61,29 @@ public class Feedfoward {
 	
 	public boolean verificaTamanho (List<Integer> ordem, List<float[][]> matrizEntrada, 
 			List<List<float[][]>> kernelsConvolutional, List<int[]> listPoolings) {
-		int tamanhoInicial = 0, tamanhoFinal = 0;
-		int tamanhoEntrada = matrizEntrada.size(), tamanhoSaida = 0;
-		for (int w = 0; w < ordem.size(); w++) {
-			if(ordem.get(w) == 0) { //convolução
-				if (tamanhoFinal == 0) {
-					tamanhoInicial = (matrizEntrada.get(0).length - kernelsConvolutional.get(0).get(0).length) + 1;
-					tamanhoFinal = tamanhoInicial;
-					if (!kernelsConvolutional.isEmpty() && kernelsConvolutional.size() > 0) {
-						kernelsConvolutional.remove(0);
-			        }
-				} else {
-					tamanhoFinal = (tamanhoInicial - kernelsConvolutional.get(0).get(0).length) + 1;
-					if (!kernelsConvolutional.isEmpty() && kernelsConvolutional.size() > 0) {
-						kernelsConvolutional.remove(0);
-			        }
-					tamanhoInicial = tamanhoFinal;
-				}
-			} else if (ordem.get(w) == 1) { //pooling
-				if (tamanhoFinal == 0) {
-					tamanhoInicial = (matrizEntrada.get(0).length - listPoolings.get(0).length) + 1;
-					tamanhoFinal = tamanhoInicial;
-					removeFirst(listPoolings);	
-				} else {
-					tamanhoFinal = (tamanhoInicial - listPoolings.get(0)[1]) + 1;
-					removeFirst(listPoolings);	
-					tamanhoInicial = tamanhoFinal;
-				}
-			} else { 
-				System.out.println("Algo errado");
-			}
-		}
-		System.out.println("Tamanho final mesmo: \n" + tamanhoFinal);
-		if (tamanhoFinal > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	/*public boolean verificaTamanho (List<Integer> ordem, List<float[][]> matrizEntrada, 
-			List<List<float[][]>> kernelsConvolutional, List<int[]> listPoolings) {
-		int tamanhoEntrada = matrizEntrada.get(0).length, tamanhoSaida = 0;
+		int tamanhoEntrada = matrizEntrada.get(0).length;
 		int convolucao = 0, pooling = 0;
 		for (int w = 0; w < ordem.size(); w++) {
 			if(ordem.get(w) == 0) { //convolução
-				if () {
-					
+				try {
+					tamanhoEntrada = tamanhoEntrada - kernelsConvolutional.get(convolucao).get(0).length + 1; 
+					convolucao++;
+				}catch (Exception e) {
+					return false;
 				}
+				
 			} else if (ordem.get(w) == 1) { //pooling
-
+				try {
+					tamanhoEntrada = tamanhoEntrada - listPoolings.get(pooling).length + 1; 
+					pooling++;
+				}catch (Exception e) {
+					return false;
+				}
 			} else { 
 				System.out.println("Algo errado");
 			}
 		}
-		System.out.println("Tamanho final mesmo: \n" + tamanhoFinal);
-		if (tamanhoFinal > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}*/
+		System.out.println("Tamanho final mesmo: \n" + tamanhoEntrada);
+		return true;
+	}
 }
