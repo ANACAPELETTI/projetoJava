@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import layers.ConvolutionalLayer;
 import layers.PoolingLayer;
+import util.Alerts;
 
 public class Feedfoward {
 	PoolingLayer poolingLayer = new PoolingLayer();
@@ -17,13 +18,11 @@ public class Feedfoward {
 		listFeedfoward.add(matrizEntrada);
 		for (int w = 0; w < ordem.size(); w++) {
 			if(ordem.get(w) == 0) { //Convolução
-				System.out.println("Convolução");
 				listFeedfoward.add(convolutionalLayer.ConvolutionalLayer(listFeedfoward.get(listFeedfoward.size()-1), kernelsConvolutional.get(0)));
 				if (!kernelsConvolutional.isEmpty() && kernelsConvolutional.size() > 0) {
 					kernelsConvolutional.remove(0);
 		        }
 			} else if (ordem.get(w) == 1) { //Pooling
-				System.out.println("Pooling");
 				listFeedfoward.add(poolingLayer.PoolingLayer(listPoolings.get(0)[0], listFeedfoward.get(listFeedfoward.size()-1), listPoolings.get(0)[1]));
 				removeFirst(listPoolings);	
 			} else { 
@@ -45,16 +44,13 @@ public class Feedfoward {
 	public boolean verificaTamanho (List<Integer> ordem, List<float[][]> matrizEntrada, 
 			List<List<float[][]>> kernelsConvolutional, List<int[]> listPoolings) {
 		int tamanhoEntrada = matrizEntrada.get(0).length;
-		System.out.println("Tamanho mesmo: \n" + tamanhoEntrada);
 		int convolucao = 0, pooling = 0;
 		for (int w = 0; w < ordem.size(); w++) {
 			if(ordem.get(w) == 0) { //Convolução
 				try {
 					tamanhoEntrada = tamanhoEntrada - kernelsConvolutional.get(convolucao).get(0).length + 1; 
 					convolucao++;
-					System.out.println("Tamanho convolução: \n" + tamanhoEntrada);
 				}catch (Exception e) {
-					System.out.println("Problema com os kernels");
 					return false;
 				}
 				
@@ -62,16 +58,14 @@ public class Feedfoward {
 				try {
 					tamanhoEntrada = tamanhoEntrada - listPoolings.get(pooling).length + 1; 
 					pooling++;
-					System.out.println("Tamanho pooling: \n" + tamanhoEntrada);
 				}catch (Exception e) {
-					System.out.println("Problema com os poolings");
 					return false;
 				}
 			} else { 
-				System.out.println("Algo errado");
+				Alerts alert = new Alerts();
+				alert.showAlert("Algo deu errado", null, null, null);
 			}
 		}
-		System.out.println("Tamanho final mesmo: \n" + tamanhoEntrada);
 		return true;
 	}
 }

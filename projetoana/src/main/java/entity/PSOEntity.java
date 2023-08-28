@@ -6,15 +6,15 @@ import java.util.List;
 public class PSOEntity {
 	private List<List<float[][]>> listaListaKernels;
 	private List<List<float[][]>> velocidade;
+	private boolean melhorGlobal;
+	private boolean melhorLocal;
+	
 	public List<List<float[][]>> getVelocidade() {
 		return velocidade;
 	}
 	public void setVelocidade(List<List<float[][]>> velocidade) {
 		this.velocidade = velocidade;
 	}
-	private boolean melhorGlobal;
-	private boolean melhorLocal;
-
 	public boolean isMelhorGlobal() {
 		return melhorGlobal;
 	}

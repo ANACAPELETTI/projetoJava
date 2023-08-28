@@ -32,6 +32,7 @@ public class ImageReader {
 			matrixImageRed.add(linhaRed);
 			matrixImageGreen.add(linhaGreen);
 			matrixImageBlue.add(linhaBlue);
+			
 		}
 		return listaParaMatriz(matrixImageBlue);
 	}
