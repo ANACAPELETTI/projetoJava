@@ -3,11 +3,11 @@ package functions;
 import java.io.File;
 
 public class Error {
-	public boolean erro(char letraClassificada, char classificacao) {
+	public float erro(char letraClassificada, char classificacao) {
 		if (letraClassificada == classificacao) {
-			return true;
+			return 0; //Verdadeiro
 		} else {
-			return false;
+			return 1; //Falso
 		}
 	}
 	
@@ -19,6 +19,6 @@ public class Error {
                 return firstLetter;
             }
         }
-        return '\0';  // Valor padrão caso não seja possível obter a primeira letra
+        return '\0';  //Valor padrão caso não seja possível obter a primeira letra
     }
 }

@@ -15,39 +15,22 @@ public class Feedfoward {
 		List<List<float[][]>> listFeedfoward = new ArrayList<List<float[][]>>();
 		
 		listFeedfoward.add(matrizEntrada);
-		for (int i = 0; i < matrizEntrada.get(0).length; i++) { 
-			  for (int j  = 0; j < matrizEntrada.get(0).length; j++) {
-				  System.out.print(matrizEntrada.get(0)[i][j] + " "); 
-			  }
-			  System.out.println("\n"); 
-			}
-		  System.out.println("-------");
-		
 		for (int w = 0; w < ordem.size(); w++) {
-			if(ordem.get(w) == 0) { //convolução
+			if(ordem.get(w) == 0) { //Convolução
 				System.out.println("Convolução");
 				listFeedfoward.add(convolutionalLayer.ConvolutionalLayer(listFeedfoward.get(listFeedfoward.size()-1), kernelsConvolutional.get(0)));
 				if (!kernelsConvolutional.isEmpty() && kernelsConvolutional.size() > 0) {
 					kernelsConvolutional.remove(0);
 		        }
-			} else if (ordem.get(w) == 1) { //pooling
+			} else if (ordem.get(w) == 1) { //Pooling
 				System.out.println("Pooling");
 				listFeedfoward.add(poolingLayer.PoolingLayer(listPoolings.get(0)[0], listFeedfoward.get(listFeedfoward.size()-1), listPoolings.get(0)[1]));
 				removeFirst(listPoolings);	
 			} else { 
 				System.out.println("Algo errado");
 			}
-			listFeedfoward.get(w+1).forEach(a -> {
-				  for (int i = 0; i < a.length; i++) { 
-					  for (int j  = 0; j < a[0].length; j++) {
-						  System.out.print(a[i][j] + " "); 
-					  }
-					  System.out.println("\n"); 
-					}
-				  System.out.println("-------");
-			  });
 		}
-		for (int w = 0; w < listFeedfoward.get(listFeedfoward.size()-1).size(); w++) { //está indo até o tamanho da última lista de matrizes no listfeed...
+		for (int w = 0; w < listFeedfoward.get(listFeedfoward.size()-1).size(); w++) { //Está indo até o tamanho da última lista de matrizes no listfeed...
 			sum += listFeedfoward.get(listFeedfoward.size()-1).get(w)[0][0];
 		}
 		return sum;
@@ -62,21 +45,26 @@ public class Feedfoward {
 	public boolean verificaTamanho (List<Integer> ordem, List<float[][]> matrizEntrada, 
 			List<List<float[][]>> kernelsConvolutional, List<int[]> listPoolings) {
 		int tamanhoEntrada = matrizEntrada.get(0).length;
+		System.out.println("Tamanho mesmo: \n" + tamanhoEntrada);
 		int convolucao = 0, pooling = 0;
 		for (int w = 0; w < ordem.size(); w++) {
-			if(ordem.get(w) == 0) { //convolução
+			if(ordem.get(w) == 0) { //Convolução
 				try {
 					tamanhoEntrada = tamanhoEntrada - kernelsConvolutional.get(convolucao).get(0).length + 1; 
 					convolucao++;
+					System.out.println("Tamanho convolução: \n" + tamanhoEntrada);
 				}catch (Exception e) {
+					System.out.println("Problema com os kernels");
 					return false;
 				}
 				
-			} else if (ordem.get(w) == 1) { //pooling
+			} else if (ordem.get(w) == 1) { //Pooling
 				try {
 					tamanhoEntrada = tamanhoEntrada - listPoolings.get(pooling).length + 1; 
 					pooling++;
+					System.out.println("Tamanho pooling: \n" + tamanhoEntrada);
 				}catch (Exception e) {
+					System.out.println("Problema com os poolings");
 					return false;
 				}
 			} else { 

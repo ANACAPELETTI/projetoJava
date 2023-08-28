@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PSOEntity {
@@ -27,7 +28,8 @@ public class PSOEntity {
 		this.melhorLocal = melhorLocal;
 	}
 	public List<List<float[][]>> getListaListaKernels() {
-		return listaListaKernels;
+		List<List<float[][]>> listaListaKernelsNova = new ArrayList<List<float[][]>>(listaListaKernels);
+		return listaListaKernelsNova;
 	}
 	public void setListaListaKernels(List<List<float[][]>> listaListaKernels) {
 		this.listaListaKernels = listaListaKernels;
