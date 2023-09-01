@@ -6,11 +6,20 @@ import java.util.List;
 public class PSOEntity {
 	private List<List<float[][]>> listaListaKernels;
 	private List<List<float[][]>> velocidade;
+	private float erro;
 	private boolean melhorGlobal;
 	private boolean melhorLocal;
 	
+	public float getErro() {
+		return erro;
+	}
+	public void setErro(float erro) {
+		this.erro = erro;
+	}
+	
 	public List<List<float[][]>> getVelocidade() {
-		return velocidade;
+		List<List<float[][]>> novaVelocidade = new ArrayList<List<float[][]>>(velocidade);
+		return novaVelocidade;
 	}
 	public void setVelocidade(List<List<float[][]>> velocidade) {
 		this.velocidade = velocidade;

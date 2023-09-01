@@ -6,7 +6,7 @@ public class Classificador {
         char letraClassificada = ' ';
 		if (tipoClassificador == 0) {
 			double letra = sigmoid(resultadoFeedfoward) * 26;
-			System.out.println("Resultado sigmoide: "+ letra);
+			//System.out.println("Resultado sigmoide: "+ letra);
 			for (int i = 0; i < 26; i++) {
 				if (letra > i && letra <= i + 1) {
 					letraClassificada = alphabet[i];
@@ -14,7 +14,7 @@ public class Classificador {
 			}
 		} else if (tipoClassificador == 1) {
 			double letra = tangenteHiperbolica(resultadoFeedfoward) * 26;
-			System.out.println("Resultado tangente hiperbólica: "+ letra);
+			//System.out.println("Resultado tangente hiperbólica: "+ letra);
 			for (int i = 0; i < 26; i++) {
 				if (letra > i && letra <= i + 1) {
 					letraClassificada = alphabet[i];

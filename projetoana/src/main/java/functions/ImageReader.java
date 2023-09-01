@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 public class ImageReader {
 	public float[][] imageReader(String caminhoImage) {
 		Image image = new Image(caminhoImage);
-		System.out.println("Leu: "+caminhoImage);
 		PixelReader reader = image.getPixelReader();
 		int height = (int) image.getHeight();
 		int width = (int) image.getWidth();
