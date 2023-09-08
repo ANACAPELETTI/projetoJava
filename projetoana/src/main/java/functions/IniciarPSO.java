@@ -29,13 +29,12 @@ public class IniciarPSO {
 			listaPsoEntity.add(psoEntity);
 			for (int j = 0; j < listImageMatriz.size(); j++) {
 				float[][] imageMatriz2 = listImageMatriz.get(j);
-				List<float[][]> listImageMatriz2 = new ArrayList<float[][]>();
-				listImageMatriz2.add(imageMatriz2);
 				int tipoDeClassificador = 0;
-				if (feedfoward.verificaTamanho(listaOrdemOperacoes, listImageMatriz2, psoEntity.getListaListaKernels(),
+				//if (feedfoward.verificaTamanho(listaOrdemOperacoes, listImageMatriz, psoEntity.getListaListaKernels(),
+				if (feedfoward.verificaTamanho(listaOrdemOperacoes, listImageMatriz, listaPsoEntity.get(x).getListaListaKernels(),
 						feedfowardEntity.getListaPoolings()) == true) {
-					float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz2,
-							psoEntity.getListaListaKernels(), feedfowardEntity.getListaPoolings());
+					float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz,
+						listaPsoEntity.get(x).getListaListaKernels(), feedfowardEntity.getListaPoolings());
 					//System.out.println("Resultado final: " + resultadoFinal);
 					char letraClassificada = classificador.classifica(resultadoFinal, tipoDeClassificador);
 					//System.out.println("Letra classificada: " + letraClassificada);

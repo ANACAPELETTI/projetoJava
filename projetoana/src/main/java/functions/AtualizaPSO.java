@@ -12,7 +12,6 @@ import util.Alerts;
 public class AtualizaPSO {
 	public List<PSOEntity> atualizaPSO(List<Integer> listaOrdemOperacoes, List<float[][]> listImageMatriz,
 			FeedfowardEntity feedfowardEntity, List<PSOEntity> listaPsoEntity, int indiceMelhorGlobal) {
-		PSOFuncoesAuxiliares psoFuncoesAuxiliares = new PSOFuncoesAuxiliares();
 		Feedfoward feedfoward = new Feedfoward();
 		Classificador classificador = new Classificador();
 		Alerts alert = new Alerts();
@@ -20,14 +19,12 @@ public class AtualizaPSO {
 
 		for (int x = 0; x < listaPsoEntity.size(); x++) {
 			float erroGeral = 0;
-			List<List<float[][]>> listaListaKernels = listaPsoEntity.get(x).getListaListaKernels();
-			List<List<float[][]>> listaListaVelocidade = listaPsoEntity.get(x).getVelocidade();
 			for (int j = 0; j < listImageMatriz.size(); j++) {
 				int tipoDeClassificador = 0;
-				if (feedfoward.verificaTamanho(listaOrdemOperacoes, listImageMatriz, listaListaKernels,
+				if (feedfoward.verificaTamanho(listaOrdemOperacoes, listImageMatriz, listaPsoEntity.get(x).getListaListaKernels(),
 						feedfowardEntity.getListaPoolings()) == true) {
 					float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz,
-							listaListaKernels, feedfowardEntity.getListaPoolings());
+							listaPsoEntity.get(x).getListaListaKernels(), feedfowardEntity.getListaPoolings());
 					//System.out.println("Resultado final: " + resultadoFinal);
 					char letraClassificada = classificador.classifica(resultadoFinal, tipoDeClassificador);
 					//System.out.println("Letra classificada: " + letraClassificada);
@@ -40,7 +37,7 @@ public class AtualizaPSO {
 					alert.showAlert("Não é possível realizar as operações", null, null, AlertType.ERROR);
 				}
 			}
-			System.out.println("\n\nErro geral: " + erroGeral);
+			System.out.println("\n\nErro geral: " + erroGeral + " particula: " +x);
 			listaPsoEntity.get(x).setErro(erroGeral);
 			if (erroGeral < listaPsoEntity.get(indiceMelhorGlobal).getErro() && x != indiceMelhorGlobal) {
 				listaPsoEntity.get(indiceMelhorGlobal).setMelhorGlobal(false);

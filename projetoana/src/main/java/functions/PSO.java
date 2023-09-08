@@ -75,7 +75,7 @@ public class PSO extends Application {
 			List<float[][]> listImageMatriz = new ArrayList<float[][]>();
 			List<Character> listaLetrasCorretas = new ArrayList<Character>();
 			
-			for (int j = 0; j < 1; j++) {
+			for (int j = 0; j < 9; j++) {
 				imageMatriz = imageReader.imageReader("/images/"+alphabet[0]+(j+1)+".png");
 				listImageMatriz.add(imageMatriz);
 				listaLetrasCorretas.add(alphabet[0]);
@@ -87,7 +87,7 @@ public class PSO extends Application {
 			
 			feedfowardEntity.setLetraCorreta(listaLetrasCorretas);
 			
-			int numeroParticulas = 2;
+			int numeroParticulas = 5;
 			
 			List<PSOEntity> listaPsoEntity = iniciarPso.inicializaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, numeroParticulas);
 			int indiceMelhorGlobal = 0;

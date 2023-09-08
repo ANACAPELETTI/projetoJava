@@ -71,15 +71,17 @@ public class PSOFuncoesAuxiliares {
 	}
 	
 	public void atualiza (List<PSOEntity> listaPsoEntity, int indiceMelhorGlobal) {
-		List<List<float[][]>> novaParticula = new ArrayList<List<float[][]>>();
-		List<List<float[][]>> novaVelocidade = new ArrayList<List<float[][]>>();
+		//System.out.println("Kernels atualiza: "+listaPsoEntity.get(0).getListaListaKernels().size());
 	
 		for (int p = 0; p < listaPsoEntity.size(); p++) { //partículas
+			List<List<float[][]>> novaParticula = new ArrayList<List<float[][]>>();
+			List<List<float[][]>> novaVelocidade = new ArrayList<List<float[][]>>();
 			PSOEntity psoEntity = listaPsoEntity.get(p);
+			//System.out.println("Kernels número: "+psoEntity.getListaListaKernels().size());
 			for (int i = 0; i < psoEntity.getListaListaKernels().size(); i++) {
 				List<float[][]> listaKernels = new ArrayList<float[][]>();
 				List<float[][]> listaVelocidades = new ArrayList<float[][]>();
-				for (int k = 0; k < psoEntity.getListaListaKernels().get(i).size(); k++) {
+				for (int k = 0; k < psoEntity.getListaListaKernels().size(); k++) {
 					float[][] matrizKernel = psoEntity.getListaListaKernels().get(i).get(k);
 					float[][] matrizVelocidade = psoEntity.getVelocidade().get(i).get(k);
 					matrizVelocidade = atualizaVelocidade(matrizVelocidade, listaPsoEntity.get(indiceMelhorGlobal).getListaListaKernels().get(i).get(k));
@@ -93,6 +95,7 @@ public class PSOFuncoesAuxiliares {
 			psoEntity.setVelocidade(novaVelocidade);
 			psoEntity.setListaListaKernels(novaParticula);
 		}
+		//System.out.println("Kernels atualizado: "+listaPsoEntity.get(0).getListaListaKernels().size());
 	}
 	
 	public float[][] atualizaParticula (float[][] particula, float[][] velocidade) {
