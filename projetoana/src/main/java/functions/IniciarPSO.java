@@ -28,16 +28,16 @@ public class IniciarPSO {
 			psoEntity.setVelocidade(listaListaVelocidade);
 			listaPsoEntity.add(psoEntity);
 			for (int j = 0; j < listImageMatriz.size(); j++) {
-				float[][] imageMatriz2 = listImageMatriz.get(j);
+				//float[][] imageMatriz2 = listImageMatriz.get(j);
 				int tipoDeClassificador = 0;
 				//if (feedfoward.verificaTamanho(listaOrdemOperacoes, listImageMatriz, psoEntity.getListaListaKernels(),
 				if (feedfoward.verificaTamanho(listaOrdemOperacoes, listImageMatriz, listaPsoEntity.get(x).getListaListaKernels(),
 						feedfowardEntity.getListaPoolings()) == true) {
 					float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz,
 						listaPsoEntity.get(x).getListaListaKernels(), feedfowardEntity.getListaPoolings());
-					//System.out.println("Resultado final: " + resultadoFinal);
+					System.out.println("Resultado final: " + resultadoFinal);
 					char letraClassificada = classificador.classifica(resultadoFinal, tipoDeClassificador);
-					//System.out.println("Letra classificada: " + letraClassificada);
+					System.out.println("Letra classificada: " + letraClassificada);
 					char letraCerta = feedfowardEntity.getLetraCorreta().get(j);
 					//System.out.println("Letra certa: " + letraCerta);
 					//System.out.println("Classificação certa? " + erro.erro(letraClassificada, letraCerta));

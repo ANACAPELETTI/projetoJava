@@ -10,7 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import util.Alerts;
 
 public class AtualizaPSO {
-	public List<PSOEntity> atualizaPSO(List<Integer> listaOrdemOperacoes, List<float[][]> listImageMatriz,
+	public void atualizaPSO(List<Integer> listaOrdemOperacoes, List<float[][]> listImageMatriz,
 			FeedfowardEntity feedfowardEntity, List<PSOEntity> listaPsoEntity, int indiceMelhorGlobal) {
 		Feedfoward feedfoward = new Feedfoward();
 		Classificador classificador = new Classificador();
@@ -25,9 +25,9 @@ public class AtualizaPSO {
 						feedfowardEntity.getListaPoolings()) == true) {
 					float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz,
 							listaPsoEntity.get(x).getListaListaKernels(), feedfowardEntity.getListaPoolings());
-					//System.out.println("Resultado final: " + resultadoFinal);
+					System.out.println("Resultado final: " + resultadoFinal);
 					char letraClassificada = classificador.classifica(resultadoFinal, tipoDeClassificador);
-					//System.out.println("Letra classificada: " + letraClassificada);
+					System.out.println("Letra classificada: " + letraClassificada);
 					char letraCerta = feedfowardEntity.getLetraCorreta().get(j);
 					//System.out.println("Letra certa: " + letraCerta);
 					//System.out.println("Classificação certa? " + erro.erro(letraClassificada, letraCerta));
@@ -48,6 +48,5 @@ public class AtualizaPSO {
 		listaPsoEntity.forEach(a -> {
 			System.out.println(a.isMelhorGlobal());
 		});
-		return listaPsoEntity;
 	}
 }

@@ -72,6 +72,7 @@ public class PSOFuncoesAuxiliares {
 	
 	public void atualiza (List<PSOEntity> listaPsoEntity, int indiceMelhorGlobal) {
 		//System.out.println("Kernels atualiza: "+listaPsoEntity.get(0).getListaListaKernels().size());
+		System.out.println("Melhor global: "+indiceMelhorGlobal);
 	
 		for (int p = 0; p < listaPsoEntity.size(); p++) { //partículas
 			List<List<float[][]>> novaParticula = new ArrayList<List<float[][]>>();
@@ -83,11 +84,20 @@ public class PSOFuncoesAuxiliares {
 				List<float[][]> listaVelocidades = new ArrayList<float[][]>();
 				for (int k = 0; k < psoEntity.getListaListaKernels().size(); k++) {
 					float[][] matrizKernel = psoEntity.getListaListaKernels().get(i).get(k);
+					if(p == indiceMelhorGlobal && i < 2 && k < 2) {
+						System.out.println(" \n" + matrizKernel[i][k]);
+					}
 					float[][] matrizVelocidade = psoEntity.getVelocidade().get(i).get(k);
-					matrizVelocidade = atualizaVelocidade(matrizVelocidade, listaPsoEntity.get(indiceMelhorGlobal).getListaListaKernels().get(i).get(k));
-					matrizKernel = atualizaParticula(matrizKernel, matrizVelocidade);
-					listaKernels.add(matrizKernel);
-					listaVelocidades.add(matrizVelocidade);
+					float[][] matrizKernel2 =  new float[matrizKernel.length][matrizKernel[0].length];
+					float[][] matrizVelocidade2 = new float[matrizVelocidade.length][matrizVelocidade[0].length];
+					matrizVelocidade2 = atualizaVelocidade(matrizVelocidade, listaPsoEntity.get(indiceMelhorGlobal).getListaListaKernels().get(i).get(k), matrizKernel);
+					matrizKernel2 = atualizaParticula(matrizKernel, matrizVelocidade2);
+					if(p == indiceMelhorGlobal && i < 2 && k < 2) {
+						System.out.println(" \n" + matrizKernel[i][k]);
+						System.out.println(" " + matrizKernel2[i][k]);
+					}
+					listaKernels.add(matrizKernel2);
+					listaVelocidades.add(matrizVelocidade2);
 				}
 				novaParticula.add(listaKernels);
 				novaVelocidade.add(listaVelocidades);
@@ -104,18 +114,19 @@ public class PSOFuncoesAuxiliares {
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
 				particula[i][j] = particula[i][j] + velocidade[i][j];
+				
 			}
 		}
 		return particula;
 	}
 	
-	public float[][] atualizaVelocidade (float[][] velocidade, float[][] melhorGlobal) {
+	public float[][] atualizaVelocidade (float[][] velocidade, float[][] melhorGlobal, float[][] kernel) {
 		int m = velocidade.length;
 		int n = velocidade[0].length;
 		Random random = new Random();
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
-				velocidade[i][j] = velocidade[i][j] + random.nextFloat() * (melhorGlobal[i][j] - velocidade[i][j]);
+				velocidade[i][j] = random.nextFloat() * (melhorGlobal[i][j] - kernel[i][j]);
 			}
 		}
 		return velocidade;

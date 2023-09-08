@@ -75,7 +75,7 @@ public class PSO extends Application {
 			List<float[][]> listImageMatriz = new ArrayList<float[][]>();
 			List<Character> listaLetrasCorretas = new ArrayList<Character>();
 			
-			for (int j = 0; j < 9; j++) {
+			for (int j = 0; j < 3; j++) {
 				imageMatriz = imageReader.imageReader("/images/"+alphabet[0]+(j+1)+".png");
 				listImageMatriz.add(imageMatriz);
 				listaLetrasCorretas.add(alphabet[0]);
@@ -87,10 +87,28 @@ public class PSO extends Application {
 			
 			feedfowardEntity.setLetraCorreta(listaLetrasCorretas);
 			
-			int numeroParticulas = 5;
+			int numeroParticulas = 3;
 			
 			List<PSOEntity> listaPsoEntity = iniciarPso.inicializaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, numeroParticulas);
 			int indiceMelhorGlobal = 0;
+			
+			for (int i = 0; i < listaPsoEntity.size(); i++) {
+				if(listaPsoEntity.get(i).isMelhorGlobal()) {
+					indiceMelhorGlobal = i;
+				}
+			}
+			
+			psoFuncoesAuxiliares.atualiza(listaPsoEntity, indiceMelhorGlobal);
+			atualizaPso.atualizaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, listaPsoEntity, indiceMelhorGlobal);
+			
+			for (int i = 0; i < listaPsoEntity.size(); i++) {
+				if(listaPsoEntity.get(i).isMelhorGlobal()) {
+					indiceMelhorGlobal = i;
+				}
+			}
+			
+			psoFuncoesAuxiliares.atualiza(listaPsoEntity, indiceMelhorGlobal);
+			atualizaPso.atualizaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, listaPsoEntity, indiceMelhorGlobal);
 			
 			for (int i = 0; i < listaPsoEntity.size(); i++) {
 				if(listaPsoEntity.get(i).isMelhorGlobal()) {
