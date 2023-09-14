@@ -21,9 +21,11 @@ public class AtualizaPSO {
 			float erroGeral = 0;
 			for (int j = 0; j < listImageMatriz.size(); j++) {
 				int tipoDeClassificador = 0;
-				if (feedfoward.verificaTamanho(listaOrdemOperacoes, listImageMatriz, listaPsoEntity.get(x).getListaListaKernels(),
+				List<float[][]> newImageMatrizList = new ArrayList<float[][]>();
+				newImageMatrizList.add(listImageMatriz.get(j));
+				if (feedfoward.verificaTamanho(listaOrdemOperacoes, newImageMatrizList, listaPsoEntity.get(x).getListaListaKernels(),
 						feedfowardEntity.getListaPoolings()) == true) {
-					float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz,
+					float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, newImageMatrizList,
 							listaPsoEntity.get(x).getListaListaKernels(), feedfowardEntity.getListaPoolings());
 					System.out.println("Resultado final: " + resultadoFinal);
 					char letraClassificada = classificador.classifica(resultadoFinal, tipoDeClassificador);

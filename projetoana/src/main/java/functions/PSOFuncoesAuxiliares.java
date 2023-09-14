@@ -82,20 +82,14 @@ public class PSOFuncoesAuxiliares {
 			for (int i = 0; i < psoEntity.getListaListaKernels().size(); i++) {
 				List<float[][]> listaKernels = new ArrayList<float[][]>();
 				List<float[][]> listaVelocidades = new ArrayList<float[][]>();
-				for (int k = 0; k < psoEntity.getListaListaKernels().size(); k++) {
+				for (int k = 0; k < psoEntity.getListaListaKernels().get(i).size(); k++) {
 					float[][] matrizKernel = psoEntity.getListaListaKernels().get(i).get(k);
-					if(p == indiceMelhorGlobal && i < 2 && k < 2) {
-						System.out.println(" \n" + matrizKernel[i][k]);
-					}
 					float[][] matrizVelocidade = psoEntity.getVelocidade().get(i).get(k);
 					float[][] matrizKernel2 =  new float[matrizKernel.length][matrizKernel[0].length];
 					float[][] matrizVelocidade2 = new float[matrizVelocidade.length][matrizVelocidade[0].length];
 					matrizVelocidade2 = atualizaVelocidade(matrizVelocidade, listaPsoEntity.get(indiceMelhorGlobal).getListaListaKernels().get(i).get(k), matrizKernel);
 					matrizKernel2 = atualizaParticula(matrizKernel, matrizVelocidade2);
-					if(p == indiceMelhorGlobal && i < 2 && k < 2) {
-						System.out.println(" \n" + matrizKernel[i][k]);
-						System.out.println(" " + matrizKernel2[i][k]);
-					}
+
 					listaKernels.add(matrizKernel2);
 					listaVelocidades.add(matrizVelocidade2);
 				}
