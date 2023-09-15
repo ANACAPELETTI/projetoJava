@@ -1,6 +1,7 @@
 package functions;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import entity.FeedfowardEntity;
@@ -14,6 +15,7 @@ public class IniciarPSO {
 			FeedfowardEntity feedfowardEntity, int numeroParticulas) {
 		PSOFuncoesAuxiliares psoFuncoesAuxiliares = new PSOFuncoesAuxiliares();
 		List<PSOEntity> listaPsoEntity = new ArrayList<PSOEntity>();
+		List<Float> erros = new ArrayList<Float>();
 		Feedfoward feedfoward = new Feedfoward();
 		Classificador classificador = new Classificador();
 		Alerts alert = new Alerts();
@@ -26,6 +28,7 @@ public class IniciarPSO {
 			PSOEntity psoEntity = new PSOEntity();
 			psoEntity.setListaListaKernels(listaListaKernels);
 			psoEntity.setVelocidade(listaListaVelocidade);
+			psoEntity.setMelhorLocal(listaListaKernels);
 			listaPsoEntity.add(psoEntity);
 			for (int j = 0; j < listImageMatriz.size(); j++) {
 				int tipoDeClassificador = 0;
@@ -41,6 +44,7 @@ public class IniciarPSO {
 					char letraCerta = feedfowardEntity.getLetraCorreta().get(j);
 					//System.out.println("Letra certa: " + letraCerta);
 					//System.out.println("Classificação certa? " + erro.erro(letraClassificada, letraCerta));
+					//psoEntity.setErro(erro.erro(letraClassificada, letraCerta)); //adicionando o erro a partícula
 					erroGeral += erro.erro(letraClassificada, letraCerta);
 					//System.out.println("-------------");
 				} else {
@@ -49,17 +53,27 @@ public class IniciarPSO {
 			}
 			System.out.println("\n\nErro geral: " + erroGeral);
 			psoEntity.setErro(erroGeral);
+			//erros.indexOf(Collections.min(erros)); //pega o índice com menor valor
 			if (x == 0) {
 				psoEntity.setMelhorGlobal(true);
-			} else {
-				if (listaPsoEntity.get(x - 1).getErro() > erroGeral) {
+			} else {	
+				for(int melhor = 0; melhor < x; melhor++) {
+					if (erroGeral < listaPsoEntity.get(melhor).getErro()) {
+						listaPsoEntity.get(melhor).setMelhorGlobal(false);
+					}
+				}
+				if (erroGeral < Collections.min(erros)) {
+					listaPsoEntity.get(x).setMelhorGlobal(true);
+				}
+				/*if (listaPsoEntity.get(x - 1).getErro() > erroGeral) {
 					listaPsoEntity.get(x - 1).setMelhorGlobal(false);
 					listaPsoEntity.get(0).setMelhorGlobal(false);
 					psoEntity.setMelhorGlobal(true);
 				} else {
 					psoEntity.setMelhorGlobal(false);
-				}
+				}*/
 			}
+			erros.add(erroGeral);
 		}
 
 		listaPsoEntity.forEach(a -> {

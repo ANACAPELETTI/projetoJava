@@ -22,7 +22,7 @@ public class Error {
 		erroFinal = Math.abs(numLetraClassificacao - numLetraClassificada);
 		//System.out.println("\n numLetraClassificacao: "  + numLetraClassificacao);
 		//System.out.println("\n numLetraClassificada: "  + numLetraClassificada);
-		System.out.println("\n Erro final: "+ erroFinal + "\n ------------------ \n");
+		//System.out.println("\n Erro final: "+ erroFinal + "\n ------------------ \n");
 		
 		return erroFinal;
 	}

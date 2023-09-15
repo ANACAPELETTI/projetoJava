@@ -8,8 +8,16 @@ public class PSOEntity {
 	private List<List<float[][]>> velocidade;
 	private float erro;
 	private boolean melhorGlobal;
-	private boolean melhorLocal;
+	private boolean melhorLocalAtual;
+	private List<List<float[][]>> melhorLocal;
 	
+	public List<List<float[][]>> getMelhorLocal() {
+		List<List<float[][]>> novoMelhorLocal = new ArrayList<List<float[][]>>(melhorLocal);
+		return novoMelhorLocal;
+	}
+	public void setMelhorLocal(List<List<float[][]>> melhorLocal) {
+		this.melhorLocal = melhorLocal;
+	}
 	public float getErro() {
 		return erro;
 	}
@@ -31,10 +39,10 @@ public class PSOEntity {
 		this.melhorGlobal = melhorGlobal;
 	}
 	public boolean isMelhorLocal() {
-		return melhorLocal;
+		return melhorLocalAtual;
 	}
-	public void setMelhorLocal(boolean melhorLocal) {
-		this.melhorLocal = melhorLocal;
+	public void setMelhorLocalAtual(boolean melhorLocalAtual) {
+		this.melhorLocalAtual = melhorLocalAtual;
 	}
 	public List<List<float[][]>> getListaListaKernels() {
 		List<List<float[][]>> listaListaKernelsNova = new ArrayList<List<float[][]>>(listaListaKernels);

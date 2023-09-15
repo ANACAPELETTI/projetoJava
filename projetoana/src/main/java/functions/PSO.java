@@ -29,6 +29,7 @@ public class PSO extends Application {
 	subMatrix subMat = new subMatrix();
 	Feedfoward feedfoward = new Feedfoward();
 	Classificador classificador = new Classificador();
+	List<Float> erros = new ArrayList<Float>();
 	Error erro = new Error();
 	FeedfowardEntity feedfowardEntity = new FeedfowardEntity();
 	Alerts alert = new Alerts();
@@ -67,7 +68,7 @@ public class PSO extends Application {
 			List<int[]> listaPoolings = new ArrayList<int[]>(Arrays.asList(pooling1, pooling1, pooling1, pooling1));
 			feedfowardEntity.setListaPoolings(listaPoolings);
 			
-			List<Integer> listaOrdemOperacoes = new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 0, 1, 0, 1, 0));
+			List<Integer> listaOrdemOperacoes = new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 0, 0));
 
 			char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 			
@@ -76,7 +77,7 @@ public class PSO extends Application {
 			List<Character> listaLetrasCorretas = new ArrayList<Character>();
 			
 			for (int j = 0; j < 3; j++) {
-				imageMatriz = imageReader.imageReader("/images/"+alphabet[0]+(j+1)+".png");
+				imageMatriz = imageReader.imageReader("/images/"+alphabet[0]+(j)+".png");
 				listImageMatriz.add(imageMatriz);
 				listaLetrasCorretas.add(alphabet[0]);
 			}
@@ -87,42 +88,17 @@ public class PSO extends Application {
 			
 			feedfowardEntity.setLetraCorreta(listaLetrasCorretas);
 			
-			int numeroParticulas = 3;
+			int numeroParticulas = 20, numeroIteracoes = 50;
 			
 			List<PSOEntity> listaPsoEntity = iniciarPso.inicializaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, numeroParticulas);
-			int indiceMelhorGlobal = 0;
 			
-			for (int i = 0; i < listaPsoEntity.size(); i++) {
-				if(listaPsoEntity.get(i).isMelhorGlobal()) {
-					indiceMelhorGlobal = i;
+			for (int iteracao = 0; iteracao < numeroIteracoes; iteracao++) {
+				erros.clear();
+				for (int i = 0; i < listaPsoEntity.size(); i++) {
+					erros.add(listaPsoEntity.get(i).getErro());
 				}
-			}
-			
-			psoFuncoesAuxiliares.atualiza(listaPsoEntity, indiceMelhorGlobal);
-			atualizaPso.atualizaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, listaPsoEntity, indiceMelhorGlobal);
-			
-			for (int i = 0; i < listaPsoEntity.size(); i++) {
-				if(listaPsoEntity.get(i).isMelhorGlobal()) {
-					indiceMelhorGlobal = i;
-				}
-			}
-			
-			psoFuncoesAuxiliares.atualiza(listaPsoEntity, indiceMelhorGlobal);
-			atualizaPso.atualizaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, listaPsoEntity, indiceMelhorGlobal);
-			
-			for (int i = 0; i < listaPsoEntity.size(); i++) {
-				if(listaPsoEntity.get(i).isMelhorGlobal()) {
-					indiceMelhorGlobal = i;
-				}
-			}
-			
-			psoFuncoesAuxiliares.atualiza(listaPsoEntity, indiceMelhorGlobal);
-			atualizaPso.atualizaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, listaPsoEntity, indiceMelhorGlobal);
-			
-			for (int i = 0; i < listaPsoEntity.size(); i++) {
-				if(listaPsoEntity.get(i).isMelhorGlobal()) {
-					indiceMelhorGlobal = i;
-				}
+				psoFuncoesAuxiliares.atualiza(listaPsoEntity, erros);
+				atualizaPso.atualizaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, listaPsoEntity, erros);
 			}
 			
 		} catch (IOException e) {

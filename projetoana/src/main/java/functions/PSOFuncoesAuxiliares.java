@@ -2,6 +2,7 @@ package functions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -9,9 +10,9 @@ import entity.PSOEntity;
 
 public class PSOFuncoesAuxiliares {
 	public List<List<float[][]>> criaListaListaKernels () {
-		int numListasMatrizes = 5; //Número de listas de matrizes
+		int numListasMatrizes = 4; //Número de listas de matrizes
 		int numMatrizesPorLista = 10; //Número de matrizes por lista
-		int tamMatrizes = 10; //Tamanho das matrizes (tamMatrizes x tamMatrizes)
+		int tamMatrizes = 4; //Tamanho das matrizes (tamMatrizes x tamMatrizes)
 
 		List<List<float[][]>> listaListaKernels = new ArrayList<List<float[][]>>();
 
@@ -23,7 +24,7 @@ public class PSOFuncoesAuxiliares {
 				float[][] matrix = new float[tamMatrizes][tamMatrizes];
 				for (int k = 0; k < tamMatrizes; k++) {
 					for (int l = 0; l < tamMatrizes; l++) {
-						matrix[k][l] = (random.nextFloat() * 2 - 1)/26; //Número aleatório
+						matrix[k][l] = (random.nextFloat() * 2 - 1); //Número aleatório
 					}
 				}
 				listaKernels.add(matrix);
@@ -34,9 +35,9 @@ public class PSOFuncoesAuxiliares {
 	}
 	
 	public List<List<float[][]>> criaVelocidade0 () {
-		int numListasMatrizes = 5; //Número de listas de matrizes
+		int numListasMatrizes = 4; //Número de listas de matrizes
 		int numMatrizesPorLista = 10; //Número de matrizes por lista
-		int tamMatrizes = 10; //Tamanho das matrizes (tamMatrizes x tamMatrizes)
+		int tamMatrizes = 4; //Tamanho das matrizes (tamMatrizes x tamMatrizes)
 
 		List<List<float[][]>> listaListaKernels = new ArrayList<List<float[][]>>();
 
@@ -46,7 +47,7 @@ public class PSOFuncoesAuxiliares {
 				float[][] matrix = new float[tamMatrizes][tamMatrizes];
 				for (int k = 0; k < tamMatrizes; k++) {
 					for (int l = 0; l < tamMatrizes; l++) {
-						matrix[k][l] = (float) 0;
+						matrix[k][l] = (float) 0.001;
 					}
 				}
 				listaKernels.add(matrix);
@@ -70,10 +71,9 @@ public class PSOFuncoesAuxiliares {
 		}
 	}
 	
-	public void atualiza (List<PSOEntity> listaPsoEntity, int indiceMelhorGlobal) {
+	public void atualiza (List<PSOEntity> listaPsoEntity, List<Float> erros) {
 		//System.out.println("Kernels atualiza: "+listaPsoEntity.get(0).getListaListaKernels().size());
-		System.out.println("Melhor global: "+indiceMelhorGlobal);
-	
+		System.out.println("Melhor global: "+erros.indexOf(Collections.min(erros)));
 		for (int p = 0; p < listaPsoEntity.size(); p++) { //partículas
 			List<List<float[][]>> novaParticula = new ArrayList<List<float[][]>>();
 			List<List<float[][]>> novaVelocidade = new ArrayList<List<float[][]>>();
@@ -87,7 +87,7 @@ public class PSOFuncoesAuxiliares {
 					float[][] matrizVelocidade = psoEntity.getVelocidade().get(i).get(k);
 					float[][] matrizKernel2 =  new float[matrizKernel.length][matrizKernel[0].length];
 					float[][] matrizVelocidade2 = new float[matrizVelocidade.length][matrizVelocidade[0].length];
-					matrizVelocidade2 = atualizaVelocidade(matrizVelocidade, listaPsoEntity.get(indiceMelhorGlobal).getListaListaKernels().get(i).get(k), matrizKernel);
+					matrizVelocidade2 = atualizaVelocidade(matrizVelocidade, listaPsoEntity.get(erros.indexOf(Collections.min(erros))).getListaListaKernels().get(i).get(k), psoEntity.getMelhorLocal().get(i).get(k), matrizKernel);
 					matrizKernel2 = atualizaParticula(matrizKernel, matrizVelocidade2);
 
 					listaKernels.add(matrizKernel2);
@@ -114,13 +114,15 @@ public class PSOFuncoesAuxiliares {
 		return particula;
 	}
 	
-	public float[][] atualizaVelocidade (float[][] velocidade, float[][] melhorGlobal, float[][] kernel) {
+	public float[][] atualizaVelocidade (float[][] velocidade, float[][] melhorGlobal, float[][] melhorLocal, float[][] kernel) {
 		int m = velocidade.length;
 		int n = velocidade[0].length;
+		float pesoLocal = (float) 0.5;
+		float pesoGlobal = (float) 2.0;
 		Random random = new Random();
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
-				velocidade[i][j] = random.nextFloat() * (melhorGlobal[i][j] - kernel[i][j]);
+				velocidade[i][j] += pesoGlobal * random.nextFloat() * (melhorGlobal[i][j] - kernel[i][j]) + pesoLocal * random.nextFloat() * (melhorLocal[i][j] - kernel[i][j]);
 			}
 		}
 		return velocidade;
