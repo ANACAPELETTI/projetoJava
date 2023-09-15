@@ -1,5 +1,6 @@
 package functions;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +77,7 @@ public class PSO extends Application {
 			List<float[][]> listImageMatriz = new ArrayList<float[][]>();
 			List<Character> listaLetrasCorretas = new ArrayList<Character>();
 			
-			for (int j = 0; j < 3; j++) {
+			/*for (int j = 0; j < 3; j++) {
 				imageMatriz = imageReader.imageReader("/images/"+alphabet[0]+(j)+".png");
 				listImageMatriz.add(imageMatriz);
 				listaLetrasCorretas.add(alphabet[0]);
@@ -85,19 +86,31 @@ public class PSO extends Application {
 			imageMatriz = imageReader.imageReader("/images/B1.png");
 			listImageMatriz.add(imageMatriz);
 			listaLetrasCorretas.add('B');
+			*/
+			
+			File diretorio = new File("src\\main\\java\\images\\");
+			File[] arquivos = diretorio.listFiles();
+	
+			for (int j = 0; j < arquivos.length; j++) {
+				//System.out.println(diretorio.getAbsolutePath() + "\\" + arquivos[j].getName());
+				imageMatriz = imageReader.imageReader(diretorio.getAbsolutePath() + "\\" + arquivos[j].getName());
+				listImageMatriz.add(imageMatriz);
+				listaLetrasCorretas.add(arquivos[j].getName().charAt(0));
+			}
 			
 			feedfowardEntity.setLetraCorreta(listaLetrasCorretas);
 			
 			int numeroParticulas = 20, numeroIteracoes = 50;
 			
 			List<PSOEntity> listaPsoEntity = iniciarPso.inicializaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, numeroParticulas);
-			
+			float omegaI = (float) 0.9, omegaF = (float) 0.5;
 			for (int iteracao = 0; iteracao < numeroIteracoes; iteracao++) {
 				erros.clear();
+				float omega = omegaI + (omegaF - omegaI) * iteracao/numeroIteracoes;
 				for (int i = 0; i < listaPsoEntity.size(); i++) {
 					erros.add(listaPsoEntity.get(i).getErro());
 				}
-				psoFuncoesAuxiliares.atualiza(listaPsoEntity, erros);
+				psoFuncoesAuxiliares.atualiza(listaPsoEntity, erros, omega);
 				atualizaPso.atualizaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, listaPsoEntity, erros);
 			}
 			

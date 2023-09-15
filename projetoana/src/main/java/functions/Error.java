@@ -3,7 +3,7 @@ package functions;
 import java.io.File;
 
 public class Error {
-	public float erro(char letraClassificada, char classificacao) {
+	public float erro(char letraClassificada, char letraCerta) {
 		char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 		int numLetraClassificada = 0, numLetraClassificacao = 0;
 		float erroFinal = 0;
@@ -14,7 +14,7 @@ public class Error {
 		}
 		
 		for (int j = 0; j < 26; j++) {
-			if (classificacao == alphabet[j]) {
+			if (letraCerta == alphabet[j]) {
 				numLetraClassificacao = j;
 			}
 		}

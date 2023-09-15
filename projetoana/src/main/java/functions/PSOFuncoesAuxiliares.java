@@ -71,7 +71,7 @@ public class PSOFuncoesAuxiliares {
 		}
 	}
 	
-	public void atualiza (List<PSOEntity> listaPsoEntity, List<Float> erros) {
+	public void atualiza (List<PSOEntity> listaPsoEntity, List<Float> erros, float omega) {
 		//System.out.println("Kernels atualiza: "+listaPsoEntity.get(0).getListaListaKernels().size());
 		System.out.println("Melhor global: "+erros.indexOf(Collections.min(erros)));
 		for (int p = 0; p < listaPsoEntity.size(); p++) { //partículas
@@ -88,7 +88,7 @@ public class PSOFuncoesAuxiliares {
 					float[][] matrizKernel2 =  new float[matrizKernel.length][matrizKernel[0].length];
 					float[][] matrizVelocidade2 = new float[matrizVelocidade.length][matrizVelocidade[0].length];
 					matrizVelocidade2 = atualizaVelocidade(matrizVelocidade, listaPsoEntity.get(erros.indexOf(Collections.min(erros))).getListaListaKernels().get(i).get(k), psoEntity.getMelhorLocal().get(i).get(k), matrizKernel);
-					matrizKernel2 = atualizaParticula(matrizKernel, matrizVelocidade2);
+					matrizKernel2 = atualizaParticula(matrizKernel, matrizVelocidade2, omega);
 
 					listaKernels.add(matrizKernel2);
 					listaVelocidades.add(matrizVelocidade2);
@@ -102,12 +102,12 @@ public class PSOFuncoesAuxiliares {
 		//System.out.println("Kernels atualizado: "+listaPsoEntity.get(0).getListaListaKernels().size());
 	}
 	
-	public float[][] atualizaParticula (float[][] particula, float[][] velocidade) {
+	public float[][] atualizaParticula (float[][] particula, float[][] velocidade, float omega) {
 		int m = particula.length;
 		int n = particula[0].length;
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
-				particula[i][j] = particula[i][j] + velocidade[i][j];
+				particula[i][j] = particula[i][j] + omega * velocidade[i][j];
 				
 			}
 		}
