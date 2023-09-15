@@ -5,21 +5,19 @@ public class Classificador {
 		char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
         char letraClassificada = ' ';
 		if (tipoClassificador == 0) {
-			double letra = sigmoid(resultadoFeedfoward) * 26;
+			double letra = sigmoid(resultadoFeedfoward) * 25;
 			//System.out.println("Resultado sigmoide: "+ letra);
-			for (int i = 0; i < 26; i++) {
+			//System.out.println("Resultado sigmoide arredondado: "+ (int)letra);
+			letraClassificada = alphabet[(int)letra];
+			/*for (int i = 0; i < 26; i++) {
 				if (letra > i && letra <= i + 1) {
 					letraClassificada = alphabet[i];
 				}
-			}
+			}*/
 		} else if (tipoClassificador == 1) {
-			double letra = tangenteHiperbolica(resultadoFeedfoward) * 26;
+			double letra = tangenteHiperbolica(resultadoFeedfoward) * 25;
 			//System.out.println("Resultado tangente hiperbólica: "+ letra);
-			for (int i = 0; i < 26; i++) {
-				if (letra > i && letra <= i + 1) {
-					letraClassificada = alphabet[i];
-				}
-			}
+			letraClassificada = alphabet[(int)letra];
 		} else {
 			System.out.println("Tipo de classificador inserido incorretamente");
 		}

@@ -65,13 +65,6 @@ public class IniciarPSO {
 				if (erroGeral < Collections.min(erros)) {
 					listaPsoEntity.get(x).setMelhorGlobal(true);
 				}
-				/*if (listaPsoEntity.get(x - 1).getErro() > erroGeral) {
-					listaPsoEntity.get(x - 1).setMelhorGlobal(false);
-					listaPsoEntity.get(0).setMelhorGlobal(false);
-					psoEntity.setMelhorGlobal(true);
-				} else {
-					psoEntity.setMelhorGlobal(false);
-				}*/
 			}
 			erros.add(erroGeral);
 		}

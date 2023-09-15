@@ -22,7 +22,7 @@ import layers.ConvolutionalLayer;
 import layers.PoolingLayer;
 import util.Alerts;
 
-public class PSO extends Application {
+public class PSO {
 	ImageReader imageReader = new ImageReader();
 	PoolingLayer poolingLayer = new PoolingLayer();
 	ConvolutionalLayer convolutionalLayer = new ConvolutionalLayer();
@@ -38,30 +38,7 @@ public class PSO extends Application {
 	IniciarPSO iniciarPso = new IniciarPSO();
 	AtualizaPSO atualizaPso = new AtualizaPSO();
 	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainView.fxml"));
-			ScrollPane scrollPane = loader.load();
-			scrollPane.getLayoutBounds();
-			scrollPane.getViewportBounds();
-			scrollPane.setFitToHeight(true);
-			scrollPane.setFitToWidth(true);
-			mainScene = new Scene(scrollPane);
-			primaryStage.setResizable(true);
-			primaryStage.setHeight(200);
-			primaryStage.setWidth(300);
-			// primaryStage.getIcons().add(new Image("/images/2.png"));
-			// primaryStage.setMaximized(true);
-			primaryStage.setScene(mainScene);
-			primaryStage.setResizable(false);
-			primaryStage.setTitle("projetoAna");
-			primaryStage.show();
-			FadeTransition ft = new FadeTransition(Duration.millis(200), scrollPane);
-			ft.setFromValue(0.0);
-			ft.setToValue(1.0);
-			ft.play();
-
+	public void pso() {
 			int[] pooling1 = {1, 2}; //pooling mínimo, com tamanho 2
 			int[] pooling2 = {2, 2}; //pooling médio, com tamanho 2
 			int[] pooling3 = {3, 2}; //pooling máximo, com tamanho 2
@@ -100,7 +77,7 @@ public class PSO extends Application {
 			
 			feedfowardEntity.setLetraCorreta(listaLetrasCorretas);
 			
-			int numeroParticulas = 20, numeroIteracoes = 50;
+			int numeroParticulas = 20, numeroIteracoes = 20;
 			
 			List<PSOEntity> listaPsoEntity = iniciarPso.inicializaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, numeroParticulas);
 			float omegaI = (float) 0.9, omegaF = (float) 0.5;
@@ -113,18 +90,6 @@ public class PSO extends Application {
 				psoFuncoesAuxiliares.atualiza(listaPsoEntity, erros, omega);
 				atualizaPso.atualizaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, listaPsoEntity, erros);
 			}
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.exit(0); //remover depois
 	}
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
-	
-	public static Scene getMainScene() {
-		return mainScene;
-	}
-
 }
