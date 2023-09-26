@@ -1,7 +1,5 @@
 package functions;
 
-import functions.subMatrix;
-
 public class Pooling {
 	//Função do teste
     public float[][] teste(float tamanhoMatrizEntrada[][], int tamanhoPooling) {
@@ -24,8 +22,7 @@ public class Pooling {
                          }
                     }
                 }
-                //atribui o valor máximo à matriz resultante
-                pooledMatrix[i][j] = maxVal;
+                pooledMatrix[i][j] = maxVal; //atribui o valor máximo à matriz resultante
            	}
        	}
         return pooledMatrix;
@@ -53,8 +50,7 @@ public class Pooling {
                         }
                     }
                 }
-                //atribui o valor mínimo à matriz resultante
-                pooledMatrix[i][j] = minVal;
+                pooledMatrix[i][j] = minVal; //atribui o valor mínimo à matriz resultante
            	}
        	}
         return pooledMatrix;
@@ -81,8 +77,7 @@ public class Pooling {
                     }
                 }
                 float average = sum / (tamanhoPooling * tamanhoPooling);
-                //atribui o valor médio à matriz resultante
-                pooledMatrix[i][j] = average;
+                pooledMatrix[i][j] = average;  //atribui o valor médio à matriz resultante
            	}
        	}
         return pooledMatrix;
@@ -110,8 +105,7 @@ public class Pooling {
                          }
                     }
                 }
-                //atribui o valor máximo à matriz resultante
-                pooledMatrix[i][j] = maxVal;
+                pooledMatrix[i][j] = maxVal; //atribui o valor máximo à matriz resultante
            	}
        	}
         return pooledMatrix;

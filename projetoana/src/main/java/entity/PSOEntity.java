@@ -24,7 +24,6 @@ public class PSOEntity {
 	public void setErro(float erro) {
 		this.erro = erro;
 	}
-	
 	public List<List<float[][]>> getVelocidade() {
 		List<List<float[][]>> novaVelocidade = new ArrayList<List<float[][]>>(velocidade);
 		return novaVelocidade;

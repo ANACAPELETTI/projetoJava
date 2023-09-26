@@ -15,7 +15,6 @@ public class PSOFuncoesAuxiliares {
 		int tamMatrizes = 4; //Tamanho das matrizes (tamMatrizes x tamMatrizes)
 
 		List<List<float[][]>> listaListaKernels = new ArrayList<List<float[][]>>();
-
 		Random random = new Random();
 
 		for (int x = 0; x < numListasMatrizes; x++) {
@@ -78,7 +77,6 @@ public class PSOFuncoesAuxiliares {
 			List<List<float[][]>> novaParticula = new ArrayList<List<float[][]>>();
 			List<List<float[][]>> novaVelocidade = new ArrayList<List<float[][]>>();
 			PSOEntity psoEntity = listaPsoEntity.get(p);
-			//System.out.println("Kernels número: "+psoEntity.getListaListaKernels().size());
 			for (int i = 0; i < psoEntity.getListaListaKernels().size(); i++) {
 				List<float[][]> listaKernels = new ArrayList<float[][]>();
 				List<float[][]> listaVelocidades = new ArrayList<float[][]>();
@@ -99,7 +97,6 @@ public class PSOFuncoesAuxiliares {
 			psoEntity.setVelocidade(novaVelocidade);
 			psoEntity.setListaListaKernels(novaParticula);
 		}
-		//System.out.println("Kernels atualizado: "+listaPsoEntity.get(0).getListaListaKernels().size());
 	}
 	
 	public float[][] atualizaParticula (float[][] particula, float[][] velocidade, float omega, boolean melhor) {

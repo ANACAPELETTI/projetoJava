@@ -3,7 +3,6 @@ package functions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import entity.FeedfowardEntity;
 import entity.PSOEntity;
 import feedfoward.Feedfoward;
@@ -28,9 +27,9 @@ public class AtualizaPSO {
 						feedfowardEntity.getListaPoolings()) == true) {
 					float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, newImageMatrizList,
 							listaPsoEntity.get(x).getListaListaKernels(), feedfowardEntity.getListaPoolings());
-					System.out.println("Resultado final: " + resultadoFinal);
+					//System.out.println("Resultado final: " + resultadoFinal);
 					char letraClassificada = classificador.classifica(resultadoFinal, tipoDeClassificador);
-					System.out.println("Letra classificada: " + letraClassificada);
+					//System.out.println("Letra classificada: " + letraClassificada);
 					char letraCerta = feedfowardEntity.getLetraCorreta().get(j);
 					//System.out.println("Letra certa: " + letraCerta);
 					//System.out.println("Classificação certa? " + erro.erro(letraClassificada, letraCerta));
@@ -40,7 +39,6 @@ public class AtualizaPSO {
 					alert.showAlert("Não é possível realizar as operações", null, null, AlertType.ERROR);
 				}
 			}
-			
 			System.out.println("\n\nErro geral: " + erroGeral + " particula: " +x);
 			listaPsoEntity.get(x).setErro(erroGeral);
 			if (erroGeral < listaPsoEntity.get(x).getErro()) {
@@ -48,7 +46,6 @@ public class AtualizaPSO {
 				listaPsoEntity.get(x).setErro(erroGeral);
 				System.out.println("\nNovo melhor local: " + listaPsoEntity.get(x).getErro());
 			}
-
 			if (erroGeral < Collections.min(erros)) {
 				for(int melhor = 0; melhor < listaPsoEntity.size(); melhor++) {
 					if(melhor != x) {
@@ -59,7 +56,6 @@ public class AtualizaPSO {
 			}
 			erros.set(x, erroGeral);
 		}
-
 		listaPsoEntity.forEach(a -> {
 			System.out.println(a.isMelhorGlobal());
 		});

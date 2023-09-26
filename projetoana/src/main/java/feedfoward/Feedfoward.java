@@ -44,10 +44,6 @@ public class Feedfoward {
 	public boolean verificaTamanho (List<Integer> ordem, List<float[][]> matrizEntrada, 
 			List<List<float[][]>> kernelsConvolutional, List<int[]> listPoolings) {
 		int tamanhoEntrada = matrizEntrada.get(0).length;
-		//System.out.println("Tamanho entrada: "+ matrizEntrada.size());
-		//System.out.println("Tamanho ordem: "+ ordem.size());
-		//System.out.println("Tamanho kernel: " + kernelsConvolutional.size());
-		//System.out.println("Tamanho pooling: "+listPoolings.size());
 		int convolucao = 0, pooling = 0;
 		for (int w = 0; w < ordem.size(); w++) {
 			if(ordem.get(w) == 0) { //Convolução

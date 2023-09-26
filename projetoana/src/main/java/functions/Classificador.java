@@ -6,17 +6,9 @@ public class Classificador {
         char letraClassificada = ' ';
 		if (tipoClassificador == 0) {
 			double letra = sigmoid(resultadoFeedfoward) * 25;
-			//System.out.println("Resultado sigmoide: "+ letra);
-			//System.out.println("Resultado sigmoide arredondado: "+ (int)letra);
 			letraClassificada = alphabet[(int)letra];
-			/*for (int i = 0; i < 26; i++) {
-				if (letra > i && letra <= i + 1) {
-					letraClassificada = alphabet[i];
-				}
-			}*/
 		} else if (tipoClassificador == 1) {
 			double letra = tangenteHiperbolica(resultadoFeedfoward) * 25;
-			//System.out.println("Resultado tangente hiperbólica: "+ letra);
 			letraClassificada = alphabet[(int)letra];
 		} else {
 			System.out.println("Tipo de classificador inserido incorretamente");

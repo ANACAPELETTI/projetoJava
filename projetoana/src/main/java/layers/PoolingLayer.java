@@ -2,11 +2,7 @@ package layers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import functions.Pooling;
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.paint.Color;
 
 public class PoolingLayer {
 	Pooling pooling = new Pooling();

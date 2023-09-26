@@ -1,9 +1,6 @@
 package functions;
 
-import functions.subMatrix;
-
 public class Convolutional {
-	//Função do box blur/convolução de desfoque
     public float[][] teste(float tamanhoMatrizEntrada[][], float kernelConvolutional[][]) {
         int kernelSize = kernelConvolutional.length;
         int convolutionalRows = (tamanhoMatrizEntrada.length - kernelSize) + 1;
@@ -22,11 +19,10 @@ public class Convolutional {
                 convolutedMatrix[i][j] = sum;
             }
         }
-
         return convolutedMatrix;
     }
     
-    public float[][] desfoque(float tamanhoMatrizEntrada[][], float kernelConvolutional[][]) {
+    public float[][] desfoque(float tamanhoMatrizEntrada[][], float kernelConvolutional[][]) { //Função do box blur/convolução de desfoque
     	subMatrix subMat = new subMatrix();
         int kernelSize = kernelConvolutional.length;
         int convolutionalRows = (tamanhoMatrizEntrada.length - kernelSize) + 1;

@@ -3,7 +3,6 @@ package functions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import entity.FeedfowardEntity;
 import entity.PSOEntity;
 import feedfoward.Feedfoward;
@@ -38,9 +37,9 @@ public class IniciarPSO {
 						feedfowardEntity.getListaPoolings()) == true) {
 					float resultadoFinal = feedfoward.feedfoward(listaOrdemOperacoes, newImageMatrizList,
 							psoEntity.getListaListaKernels(), feedfowardEntity.getListaPoolings());
-					System.out.println("Resultado final: " + resultadoFinal);
+					//System.out.println("Resultado final: " + resultadoFinal);
 					char letraClassificada = classificador.classifica(resultadoFinal, tipoDeClassificador);
-					System.out.println("Letra classificada: " + letraClassificada);
+					//System.out.println("Letra classificada: " + letraClassificada);
 					char letraCerta = feedfowardEntity.getLetraCorreta().get(j);
 					//System.out.println("Letra certa: " + letraCerta);
 					//System.out.println("Classificação certa? " + erro.erro(letraClassificada, letraCerta));
@@ -53,7 +52,6 @@ public class IniciarPSO {
 			}
 			System.out.println("\n\nErro geral: " + erroGeral);
 			psoEntity.setErro(erroGeral);
-			//erros.indexOf(Collections.min(erros)); //pega o índice com menor valor
 			if (x == 0) {
 				psoEntity.setMelhorGlobal(true);
 			} else {	
@@ -68,7 +66,6 @@ public class IniciarPSO {
 			}
 			erros.add(erroGeral);
 		}
-
 		listaPsoEntity.forEach(a -> {
 			System.out.println(a.isMelhorGlobal());
 		});
