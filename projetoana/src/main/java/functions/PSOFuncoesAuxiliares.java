@@ -85,8 +85,8 @@ public class PSOFuncoesAuxiliares {
 					float[][] matrizVelocidade = psoEntity.getVelocidade().get(i).get(k);
 					float[][] matrizKernel2 =  new float[matrizKernel.length][matrizKernel[0].length];
 					float[][] matrizVelocidade2 = new float[matrizVelocidade.length][matrizVelocidade[0].length];
-					matrizVelocidade2 = atualizaVelocidade(matrizVelocidade, listaPsoEntity.get(erros.indexOf(Collections.min(erros))).getListaListaKernels().get(i).get(k), psoEntity.getMelhorLocal().get(i).get(k), matrizKernel);
-					matrizKernel2 = atualizaParticula(matrizKernel, matrizVelocidade2, omega, psoEntity.isMelhorGlobal());
+					matrizVelocidade2 = atualizaVelocidade(matrizVelocidade, listaPsoEntity.get(erros.indexOf(Collections.min(erros))).getListaListaKernels().get(i).get(k), psoEntity.getMelhorLocal().get(i).get(k), matrizKernel, omega);
+					matrizKernel2 = atualizaParticula(matrizKernel, matrizVelocidade2, psoEntity.isMelhorGlobal());
 
 					listaKernels.add(matrizKernel2);
 					listaVelocidades.add(matrizVelocidade2);
@@ -99,22 +99,22 @@ public class PSOFuncoesAuxiliares {
 		}
 	}
 	
-	public float[][] atualizaParticula (float[][] particula, float[][] velocidade, float omega, boolean melhor) {
+	public float[][] atualizaParticula (float[][] particula, float[][] velocidade, boolean melhor) {
 		int m = particula.length;
 		int n = particula[0].length;
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
 				if(melhor) {
-					particula[i][j] = particula[i][j] + omega * velocidade[i][j];
+					particula[i][j] = particula[i][j] + velocidade[i][j];
 				} else {
-					particula[i][j] = particula[i][j] + omega * velocidade[i][j] + (float) 0.01;
+					particula[i][j] = particula[i][j] + velocidade[i][j] + (float) 0.01;
 				}
 			}
 		}
 		return particula;
 	}
 	
-	public float[][] atualizaVelocidade (float[][] velocidade, float[][] melhorGlobal, float[][] melhorLocal, float[][] kernel) {
+	public float[][] atualizaVelocidade (float[][] velocidade, float[][] melhorGlobal, float[][] melhorLocal, float[][] kernel, float omega) {
 		int m = velocidade.length;
 		int n = velocidade[0].length;
 		float pesoLocal = (float) 0.5;
@@ -122,7 +122,7 @@ public class PSOFuncoesAuxiliares {
 		Random random = new Random();
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
-				velocidade[i][j] = pesoGlobal * (velocidade[i][j] + random.nextFloat() * (melhorGlobal[i][j] - kernel[i][j]) + pesoLocal * random.nextFloat() * (melhorLocal[i][j] - kernel[i][j]));
+				velocidade[i][j] = velocidade[i][j] * omega + pesoGlobal * random.nextFloat() * (melhorGlobal[i][j] - kernel[i][j]) + pesoLocal * random.nextFloat() * (melhorLocal[i][j] - kernel[i][j]);
 			}
 		}
 		return velocidade;

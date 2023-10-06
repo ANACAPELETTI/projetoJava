@@ -1,6 +1,7 @@
 package functions;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,6 +53,43 @@ public class PSO {
 			feedfowardEntity.setLetraCorreta(listaLetrasCorretas);
 			
 			int numeroParticulas = 20, numeroIteracoes = 20;
+			
+			
+			
+			
+			List<List<float [][]>> teste = new ArrayList<List<float [][]>>();
+			List<float [][]> listaTeste = new ArrayList<float [][]>();
+			List<float [][]> listaTeste2 = new ArrayList<float [][]>();
+			float [][] matriz1 = {
+					{1, 2, -3},
+					{1, -3, 2},
+					{-2, 1, 3},
+			};
+			
+			float [][] matriz2 = {
+					{0, 0, 0, 0},
+					{0, 0, 0, 0},
+					{0, 0, 0, 0},
+					{0, 0, 0, 0},
+			};
+			
+			
+			listaTeste.add(matriz1);
+			listaTeste.add(matriz1);
+			listaTeste2.add(matriz1);
+			listaTeste2.add(matriz2);
+			listaTeste2.add(matriz2);
+			
+			teste.add(listaTeste);
+			teste.add(listaTeste2);
+			teste.add(listaTeste);
+			
+			Export export = new Export();
+			try {
+				export.exportExcel(teste);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 			List<PSOEntity> listaPsoEntity = iniciarPso.inicializaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, numeroParticulas);
 			float omegaI = (float) 0.9, omegaF = (float) 0.5;
