@@ -33,8 +33,5 @@ public class Export {
 		FileOutputStream fileOut = new FileOutputStream("ListaKernels.xlsx");
 		workbook.write(fileOut);
 		fileOut.close();
-
 	}
-
-
 }

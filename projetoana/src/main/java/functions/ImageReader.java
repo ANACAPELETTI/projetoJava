@@ -12,31 +12,18 @@ public class ImageReader {
 		PixelReader reader = image.getPixelReader();
 		int height = (int) image.getHeight();
 		int width = (int) image.getWidth();
-		
-		//List<List<Float>> matrixImageRed = new ArrayList<List<Float>>();
-		//List<List<Float>> matrixImageGreen = new ArrayList<List<Float>>();
-		//List<List<Float>> matrixImageBlue = new ArrayList<List<Float>>();
+
 		List<List<Float>> matrixImageGray = new ArrayList<List<Float>>();
 		
 		for(int i = 0 ; i < height; i++) {
-			//List<Float> linhaRed = new ArrayList<Float>();
-			//List<Float> linhaGreen = new ArrayList<Float>();
-			//List<Float> linhaBlue = new ArrayList<Float>();
 			List<Float> linhaGray = new ArrayList<Float>();
 			for(int j = 0 ; j < width; j++) {
 				Color c = reader.getColor(i, j);
-				//linhaRed.add((float) c.getRed());
-				//linhaGreen.add((float) c.getGreen());
-				//linhaBlue.add((float) c.getBlue());
 				linhaGray.add((float) (c.getRed() * 0.3 + c.getGreen() * 0.59 + c.getBlue() * 0.11)); //fórmula do Funck
 			}
-			//matrixImageRed.add(linhaRed);
-			//matrixImageGreen.add(linhaGreen);
-			//matrixImageBlue.add(linhaBlue);
 			matrixImageGray.add(linhaGray);
 		}
 		return listaParaMatriz(matrixImageGray); 
-		//return listaParaMatriz(matrixImageBlue);
 	}
 	
 	public float[][] listaParaMatriz(List<List<Float>> listaRGB) {

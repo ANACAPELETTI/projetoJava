@@ -1,6 +1,7 @@
 package functions;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +9,8 @@ import java.util.List;
 import entity.FeedfowardEntity;
 import entity.PSOEntity;
 import feedfoward.Feedfoward;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import layers.ConvolutionalLayer;
 import layers.PoolingLayer;
 import util.Alerts;
@@ -26,11 +29,18 @@ public class PSO {
 	PSOFuncoesAuxiliares psoFuncoesAuxiliares = new PSOFuncoesAuxiliares();
 	IniciarPSO iniciarPso = new IniciarPSO();
 	AtualizaPSO atualizaPso = new AtualizaPSO();
+	Import importe = new Import();
 	
 	public void pso() {
 			int[] pooling1 = {1, 2}; //pooling mínimo, com tamanho 2
 			int[] pooling2 = {2, 2}; //pooling médio, com tamanho 2
 			int[] pooling3 = {3, 2}; //pooling máximo, com tamanho 2
+
+			try {
+				importe.loadExcelFile(3, 2); //Tamanho dos kernels (3x3) e Quantidade de matrizes diferentes em cada planilha
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 			List<int[]> listaPoolings = new ArrayList<int[]>(Arrays.asList(pooling1, pooling1, pooling1, pooling1));
 			feedfowardEntity.setListaPoolings(listaPoolings);

@@ -12,7 +12,6 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	private static Scene mainScene;
-	PSO pso = new PSO();
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -37,8 +36,6 @@ public class Main extends Application {
 			ft.setFromValue(0.0);
 			ft.setToValue(1.0);
 			ft.play();
-			
-			pso.pso();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
