@@ -9,11 +9,11 @@ import java.util.Random;
 import entity.PSOEntity;
 
 public class PSOFuncoesAuxiliares {
+	private int numListasMatrizes = 4; //Número de listas de matrizes
+	private int numMatrizesPorLista = 10; //Número de matrizes por lista
+	private int tamMatrizes = 4; //Tamanho das matrizes (tamMatrizes x tamMatrizes)
+	
 	public List<List<float[][]>> criaListaListaKernels () {
-		int numListasMatrizes = 4; //Número de listas de matrizes
-		int numMatrizesPorLista = 10; //Número de matrizes por lista
-		int tamMatrizes = 4; //Tamanho das matrizes (tamMatrizes x tamMatrizes)
-
 		List<List<float[][]>> listaListaKernels = new ArrayList<List<float[][]>>();
 		Random random = new Random();
 
@@ -34,10 +34,6 @@ public class PSOFuncoesAuxiliares {
 	}
 	
 	public List<List<float[][]>> criaVelocidade0 () {
-		int numListasMatrizes = 4; //Número de listas de matrizes
-		int numMatrizesPorLista = 10; //Número de matrizes por lista
-		int tamMatrizes = 4; //Tamanho das matrizes (tamMatrizes x tamMatrizes)
-
 		List<List<float[][]>> listaListaKernels = new ArrayList<List<float[][]>>();
 
 		for (int x = 0; x < numListasMatrizes; x++) {
@@ -105,9 +101,9 @@ public class PSOFuncoesAuxiliares {
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
 				if(melhor) {
-					particula[i][j] = particula[i][j] + velocidade[i][j];
+					particula[i][j] = particula[i][j];
 				} else {
-					particula[i][j] = particula[i][j] + velocidade[i][j] + (float) 0.01;
+					particula[i][j] = particula[i][j] + velocidade[i][j];
 				}
 			}
 		}

@@ -20,6 +20,9 @@ public class MainViewController {
 	@FXML
 	MenuItem PSO;
 	
+	@FXML
+	MenuItem classificador;
+	
 	private synchronized <T> void loadView(String absoluteName, String title) {
 		try {
 			Stage stage = new Stage();
@@ -28,7 +31,7 @@ public class MainViewController {
 			Scene scene = new Scene(root);
 			stage.setTitle(title);
 			stage.setScene(scene);
-			stage.setResizable(false);
+			stage.setResizable(true);
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.show();
 		} catch (IOException e) {
@@ -39,6 +42,13 @@ public class MainViewController {
 	public void classificar () {
 		LoadView loadView = new LoadView();
 		loadView.loadView("/gui/DevView.fxml", (DevViewController controller) -> {
+		});
+	}
+	
+	@FXML
+	public void classificarTeste () {
+		LoadView loadView = new LoadView();
+		loadView.loadView("/gui/ClassificadorTeste.fxml", (ClassificadorTesteController controller) -> {
 		});
 	}
 	

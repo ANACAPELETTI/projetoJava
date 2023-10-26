@@ -36,11 +36,11 @@ public class PSO {
 			int[] pooling2 = {2, 2}; //pooling médio, com tamanho 2
 			int[] pooling3 = {3, 2}; //pooling máximo, com tamanho 2
 
-			try {
+			/*try {
 				importe.loadExcelFile(3, 2); //Tamanho dos kernels (3x3) e Quantidade de matrizes diferentes em cada planilha
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}*/
 			
 			List<int[]> listaPoolings = new ArrayList<int[]>(Arrays.asList(pooling1, pooling1, pooling1, pooling1));
 			feedfowardEntity.setListaPoolings(listaPoolings);
@@ -62,44 +62,14 @@ public class PSO {
 			
 			feedfowardEntity.setLetraCorreta(listaLetrasCorretas);
 			
-			int numeroParticulas = 20, numeroIteracoes = 20;
+			int numeroParticulas = 5, numeroIteracoes = 10;
 			
-			
-			
-			
-			List<List<float [][]>> teste = new ArrayList<List<float [][]>>();
-			List<float [][]> listaTeste = new ArrayList<float [][]>();
-			List<float [][]> listaTeste2 = new ArrayList<float [][]>();
-			float [][] matriz1 = {
-					{1, 2, -3},
-					{1, -3, 2},
-					{-2, 1, 3},
-			};
-			
-			float [][] matriz2 = {
-					{0, 0, 0, 0},
-					{0, 0, 0, 0},
-					{0, 0, 0, 0},
-					{0, 0, 0, 0},
-			};
-			
-			
-			listaTeste.add(matriz1);
-			listaTeste.add(matriz1);
-			listaTeste2.add(matriz1);
-			listaTeste2.add(matriz2);
-			listaTeste2.add(matriz2);
-			
-			teste.add(listaTeste);
-			teste.add(listaTeste2);
-			teste.add(listaTeste);
-			
-			Export export = new Export();
+			/*Export export = new Export();
 			try {
 				export.exportExcel(teste);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}*/
 			
 			List<PSOEntity> listaPsoEntity = iniciarPso.inicializaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, numeroParticulas);
 			float omegaI = (float) 0.9, omegaF = (float) 0.5;
@@ -112,6 +82,26 @@ public class PSO {
 				psoFuncoesAuxiliares.atualiza(listaPsoEntity, erros, omega);
 				atualizaPso.atualizaPSO(listaOrdemOperacoes, listImageMatriz, feedfowardEntity, listaPsoEntity, erros);
 			}
+			
+			PSOEntity melhorGlobal = achaAMelhorGlobal(listaPsoEntity);
+			
+			Export export = new Export();
+			try {
+				export.exportExcel(melhorGlobal.getListaListaKernels());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		System.exit(0); //remover depois
+	}
+	
+	
+	public PSOEntity achaAMelhorGlobal(List<PSOEntity> listaPsoEntity) {
+		PSOEntity melhorGlobal = new PSOEntity();
+		for (int i = 0; i < listaPsoEntity.size(); i++) {
+			if(listaPsoEntity.get(i).isMelhorGlobal()) {
+				melhorGlobal = listaPsoEntity.get(i);
+			}
+		}
+		return melhorGlobal;
 	}
 }

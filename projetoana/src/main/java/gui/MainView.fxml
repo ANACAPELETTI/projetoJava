@@ -22,6 +22,11 @@
                       <MenuItem fx:id="PSO" mnemonicParsing="false" onAction="#executarPso" text="PSO" />
                     </items>
                   </Menu>
+                  <Menu mnemonicParsing="false" text="ClassificadorUsuário">
+                     <items>
+                        <MenuItem fx:id="classificador" mnemonicParsing="false" onAction="#classificarTeste" text="Teste" />
+                     </items>
+                  </Menu>
 					</menus>
                <padding>
                   <Insets top="2.0" />
