@@ -3,43 +3,30 @@ package functions;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import entity.PSOEntity;
-import javafx.geometry.Pos;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class Import {
-	private int numeroColunas;
-	private int numeroLinhas;
-	private GridPane dadosExperimentaisGridPane = new GridPane();
-	private GridPane resultadosGridPane = new GridPane();
-	private PSOEntity psoEntity = new PSOEntity();
-	//private ManipulateNode Return = new ManipulateNode();
-	
+
 	public List<List<float[][]>> loadExcelFile(
-			//ManipulateNode ReturnE,
-			int tamanhoKernel,
-			int numeroKernels
-		
-			) throws Exception {
+			// ManipulateNode ReturnE,
+			int tamanhoKernel, int numeroKernels
+
+	) throws Exception {
 		File selectedFile;
 		List<List<float[][]>> particulasKernel = new ArrayList<List<float[][]>>();
 
 		String caminho = "";
 
-		ExtensionFilter xls = new ExtensionFilter("Excel (*.xls, *.xlxs)", "*.*");
+		ExtensionFilter xls = new ExtensionFilter("Excel (*.xls, *.xlsx)", "*.xls", "*.xlsx");
 
 		FileChooser fileChooser = new FileChooser();
 
@@ -54,8 +41,7 @@ public class Import {
 
 			Workbook workBook = new XSSFWorkbook(file);
 			List<Sheet> listaPlanilhas = new ArrayList<Sheet>();
-			//Sheet sheet = workBook.getSheetAt(0);
-			
+
 			for (int i = 0; i < workBook.getNumberOfSheets(); i++) {
 				Sheet sheet = workBook.getSheetAt(i);
 				listaPlanilhas.add(sheet);
@@ -63,9 +49,10 @@ public class Import {
 				int contador = 0;
 				for (int j = 0; j < numeroKernels; j++) {
 					float[][] kernels = new float[tamanhoKernel][tamanhoKernel];
-					for (int linha = contador; linha < tamanhoKernel * numeroKernels; linha++) {
+					for (int linha = 0; linha < tamanhoKernel; linha++) {
 						for (int coluna = 0; coluna < tamanhoKernel; coluna++) {
-							kernels[i][j] = (float) sheet.getRow(linha).getCell(coluna).getNumericCellValue();
+							Cell cell = sheet.getRow(contador).getCell(coluna);
+							kernels[linha][coluna] = Float.valueOf(cell.toString());
 						}
 						contador++;
 					}
@@ -73,7 +60,7 @@ public class Import {
 				}
 				particulasKernel.add(listaKernel);
 			}
-			psoEntity.setListaListaKernels(particulasKernel);
+
 		}
 		return particulasKernel;
 	}

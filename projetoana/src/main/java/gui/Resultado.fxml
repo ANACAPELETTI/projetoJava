@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ResultadoController">
+   <children>
+      <HBox prefHeight="402.0" prefWidth="600.0">
+         <children>
+            <VBox prefHeight="346.0" prefWidth="380.0">
+               <children>
+                  <ScrollPane style="-fx-focus-color: transparent;">
+                     <content>
+                        <Label fx:id="texto" alignment="CENTER" prefHeight="237.0" prefWidth="334.0" />
+                     </content>
+                  </ScrollPane>
+                  <HBox prefHeight="57.0" prefWidth="266.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="btReiniciar" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Reiniciar" />
+                        <Button fx:id="btCopiar" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Copiar" />
+                        <Button fx:id="btExportar" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Exportar" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="400.0" prefWidth="211.0">
+               <children>
+                  <ScrollPane fx:id="scrollPane" prefHeight="400.0" prefWidth="203.0">
+                     <content>
+                        <ImageView fx:id="imagemView" fitHeight="400.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
+                     </content>
+                  </ScrollPane>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets top="30.0" />
+   </padding>
+</VBox>

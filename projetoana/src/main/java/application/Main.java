@@ -24,8 +24,8 @@ public class Main extends Application {
 			scrollPane.setFitToWidth(true);
 			mainScene = new Scene(scrollPane);
 			primaryStage.setResizable(true);
-			primaryStage.setHeight(200);
-			primaryStage.setWidth(300);
+			//primaryStage.setHeight(200);
+			//primaryStage.setWidth(300);
 			// primaryStage.getIcons().add(new Image("/images/2.png"));
 			// primaryStage.setMaximized(true);
 			primaryStage.setScene(mainScene);

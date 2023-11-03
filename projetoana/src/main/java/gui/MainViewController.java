@@ -23,21 +23,6 @@ public class MainViewController {
 	@FXML
 	MenuItem classificador;
 	
-	private synchronized <T> void loadView(String absoluteName, String title) {
-		try {
-			Stage stage = new Stage();
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-			Parent root = loader.load();
-			Scene scene = new Scene(root);
-			stage.setTitle(title);
-			stage.setScene(scene);
-			stage.setResizable(true);
-			stage.initModality(Modality.WINDOW_MODAL);
-			stage.show();
-		} catch (IOException e) {
-		}
-	}
-	
 	@FXML
 	public void classificar () {
 		LoadView loadView = new LoadView();
