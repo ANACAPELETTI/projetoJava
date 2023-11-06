@@ -1,0 +1,26 @@
+.barraSuperior {
+	-fx-background-color: #002D40; 
+}
+
+.sideBar {
+	-fx-background-color: white; 
+}
+
+.botaoImagem {
+	-fx-background-color: #4682B4;
+	-fx-text-fill: white;
+	-fx-font-size: 12;
+	-jfx-button-type: raised;
+}
+
+.lugarTextoEImagemOriginal {
+	-fx-focus-color: transparent;
+	-fx-background-color: white;
+}
+
+.botoes {
+	-fx-background-color: #002D40; 
+	-fx-text-fill: white;
+	-fx-font-size: 12;
+}
+
