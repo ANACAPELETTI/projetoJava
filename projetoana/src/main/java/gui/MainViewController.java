@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 public class MainViewController implements Initializable{
 	
 	@FXML
-    private AnchorPane pane1,pane2;
+    private AnchorPane pane1, pane2, pane3;
 
     @FXML
     private ImageView exit, menu;
@@ -59,6 +59,12 @@ public class MainViewController implements Initializable{
             TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5),pane2);
             translateTransition1.setByX(+600);
             translateTransition1.play();
+            
+            
+            TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(0.5),pane3);
+            pane3.setPrefWidth(pane3.getWidth() + 193);
+            translateTransition2.setByX(+193);
+            translateTransition2.play();
         });
 
         pane1.setOnMouseClicked(event -> {
@@ -74,6 +80,11 @@ public class MainViewController implements Initializable{
             TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5),pane2);
             translateTransition1.setByX(-600);
             translateTransition1.play();
+            
+            TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(0.5),pane3);
+            pane3.setPrefWidth(pane3.getWidth() - 193);
+            translateTransition2.setByX(-193);
+            translateTransition2.play();
         });
     }
 	
@@ -89,13 +100,15 @@ public class MainViewController implements Initializable{
 	@FXML
 	public void classificar () {
     	LoadView loadView = new LoadView();
-        loadView.loadView("/gui/DevView.fxml", (DevViewController controller) -> {});
+        loadView.loadView("/gui/DevView.fxml", (DevViewController controller) -> {}, pane3 );
 	}
 	
 	@FXML
 	public void classificarTeste () {
 		LoadView loadView = new LoadView();
-        loadView.loadView("/gui/ClassificadorTeste.fxml", (ClassificadorTesteController controller) -> {});
+        loadView.loadView("/gui/ClassificadorTeste.fxml", (ClassificadorTesteController controller) -> {
+        	controller.setAnchorPane(pane3);
+        }, pane3 );
 	}
 	
 	@FXML

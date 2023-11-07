@@ -11,21 +11,20 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import util.Alerts;
 
 public class LoadView {
-	public synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
+	public synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction, AnchorPane ancorPane) {
 		try {
 			Scene mainScene = Main.getMainScene();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-			VBox newVBox = loader.load();
+			AnchorPane newVBox = loader.load();
 			Platform.runLater(() -> {
-				VBox mainVBox = (VBox) mainScene.getRoot().getParent();
-				mainVBox.getChildren().clear();
-				mainVBox.getChildren().add(newVBox);
-				
+				ancorPane.getChildren().clear();
+				ancorPane.getChildren().add(newVBox);
 				T controller = loader.getController();
                 initializingAction.accept(controller);
 			});

@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import util.Kernels;
@@ -32,7 +33,17 @@ public class ClassificadorTesteController {
 	Classificador classificador = new Classificador();
 	Kernels kernelNovo = new Kernels();
 	LoadView loadView = new LoadView();
+	@FXML
+	AnchorPane anchorPane;
 	
+	public AnchorPane getAnchorPane() {
+		return anchorPane;
+	}
+
+	public void setAnchorPane(AnchorPane anchorPane) {
+		this.anchorPane = anchorPane;
+	}
+
 	@FXML
 	Button botao = new Button();
 	
@@ -80,7 +91,7 @@ public class ClassificadorTesteController {
 					controller.imagemView.setFitHeight(imagem.getHeight());
 					controller.texto.setText(resultado);
 					//controller.scrollPane.setPrefWidth()
-				});
+				}, anchorPane);
 				System.out.println(classificador.classifica(resultadoFeedfoward, 0));
 			} catch (FileNotFoundException e) {
 				System.out.println("Teste");
@@ -137,7 +148,7 @@ public class ClassificadorTesteController {
 					controller.imagemView.setFitHeight(imagem.getHeight());
 					controller.texto.setText(resultado);
 					//controller.scrollPane.setPrefWidth()
-				});
+				}, anchorPane);
 				
 				System.out.println(classificador.classifica(resultadoFeedfoward, 0));
 				

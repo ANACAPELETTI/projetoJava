@@ -5,37 +5,66 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ResultadoController">
+
+<AnchorPane prefHeight="484.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ResultadoController">
    <children>
-      <HBox prefHeight="550.0" prefWidth="750.0">
+      <Pane>
          <children>
-            <VBox prefHeight="433.0" prefWidth="409.0">
+            <VBox>
                <children>
-                  <ScrollPane prefHeight="513.0" prefWidth="394.0" styleClass="lugarTextoEImagemOriginal" stylesheets="@styles.css">
-                     <content>
-                        <Label fx:id="texto" alignment="CENTER" prefHeight="491.0" prefWidth="388.0" styleClass="lugarTextoEImagemOriginal" stylesheets="@styles.css">
-                           <padding>
-                              <Insets left="5.0" />
-                           </padding></Label>
-                     </content>
-                     <VBox.margin>
-                        <Insets left="5.0" />
-                     </VBox.margin>
-                  </ScrollPane>
-                  <HBox prefHeight="50.0" prefWidth="394.0" spacing="20.0">
+                  <HBox>
                      <children>
-                        <Button fx:id="btReiniciar" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="botoes" stylesheets="@styles.css" text="Reiniciar">
+                        <VBox>
+                           <children>
+                              <ScrollPane styleClass="lugarTextoEImagemOriginal" stylesheets="@styles.css">
+                                 <content>
+                                    <Label fx:id="texto" alignment="CENTER" styleClass="lugarTextoEImagemOriginal" stylesheets="@styles.css">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </Label>
+                                 </content>
+                                 <VBox.margin>
+                                    <Insets left="5.0" />
+                                 </VBox.margin>
+                              </ScrollPane>
+                              <HBox prefHeight="50.0" prefWidth="394.0" spacing="20.0">
+                                 <children>
+                                    <Button fx:id="btReiniciar" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="botoes" stylesheets="@styles.css" text="Reiniciar">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="btCopiar" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="botoes" stylesheets="@styles.css" text="Copiar" />
+                                    <Button fx:id="btExportar" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="botoes" stylesheets="@styles.css" text="Exportar">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <ScrollPane fx:id="scrollPane" styleClass="lugarTextoEImagemOriginal" stylesheets="@styles.css">
+                                 <content>
+                                    <ImageView fx:id="imagemView" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: white;" />
+                                 </content>
+                              </ScrollPane>
+                           </children>
                            <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin></Button>
-                        <Button fx:id="btCopiar" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="botoes" stylesheets="@styles.css" text="Copiar" />
-                        <Button fx:id="btExportar" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="botoes" stylesheets="@styles.css" text="Exportar">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin></Button>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </VBox>
                      </children>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -43,22 +72,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="469.0" prefWidth="361.0">
-               <children>
-                  <ScrollPane fx:id="scrollPane" prefHeight="541.0" prefWidth="349.0" styleClass="lugarTextoEImagemOriginal" stylesheets="@styles.css">
-                     <content>
-                        <ImageView fx:id="imagemView" fitHeight="543.0" fitWidth="354.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: white;" />
-                     </content>
-                  </ScrollPane>
-               </children>
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin>
-            </VBox>
          </children>
-         <VBox.margin>
-            <Insets top="10.0" />
-         </VBox.margin>
-      </HBox>
+      </Pane>
    </children>
-</VBox>
+</AnchorPane>
