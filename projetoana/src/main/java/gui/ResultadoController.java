@@ -1,44 +1,29 @@
 package gui;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import entity.FeedfowardEntity;
 import feedfoward.Feedfoward;
 import functions.Classificador;
 import functions.ImageReader;
 import functions.Import;
-import functions.PSO;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.FileChooser.ExtensionFilter;
 import util.Kernels;
 import util.LoadView;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class ResultadoController {
 	ImageReader imageReader = new ImageReader();
@@ -49,7 +34,14 @@ public class ResultadoController {
 	Kernels kernelNovo = new Kernels();
 	
 	@FXML
-	Button btReiniciar = new Button();
+    private AnchorPane pane3;
+	
+	public void setPane3(AnchorPane pane3) {
+        this.pane3 = pane3;
+    }
+	
+	@FXML
+	Button btReiniciar;
 	
 	@FXML
 	Button btCopiar = new Button();
@@ -73,4 +65,50 @@ public class ResultadoController {
 		imagemView.setImage(image);
 		texto.setText(textoResultado);
 	}
+	
+	@FXML
+	public void Reiniciar () {
+		LoadView loadView = new LoadView();
+	    loadView.loadView("/gui/ClassificadorTeste.fxml", (ClassificadorTesteController controller) -> {
+	        controller.setAnchorPane(pane3);
+	    }, pane3);
+	}
+	
+	@FXML
+    public void copiarTexto() {
+        String textoParaCopiar = texto.getText();
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(textoParaCopiar);
+        clipboard.setContent(content);
+        System.out.println("Texto copiado para a área de transferência: " + textoParaCopiar);
+    }
+	
+	@FXML
+    public void exportarTexto() {
+        String textoParaExportar = texto.getText();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Salvar Arquivo Texto");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Arquivos de Texto (*.txt)", "*.txt"));
+
+        String nomePadrao = "TextoExportado.txt";
+        fileChooser.setInitialFileName(nomePadrao);
+        
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            salvarTextoNoArquivo(textoParaExportar, file);
+            System.out.println("Texto exportado para o arquivo: " + file.getAbsolutePath());
+        }
+    }
+
+    private void salvarTextoNoArquivo(String texto, File file) {
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(texto);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

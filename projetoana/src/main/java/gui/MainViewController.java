@@ -1,28 +1,18 @@
 package gui;
 
-import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import functions.PSO;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import util.LoadView;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+import util.LoadView;
 
 public class MainViewController implements Initializable{
 	
@@ -30,10 +20,14 @@ public class MainViewController implements Initializable{
     private AnchorPane pane1, pane2, pane3;
 
     @FXML
-    private ImageView exit, menu;
+    private ImageView exit, exit1, menu;
     
     public void initialize(URL location, ResourceBundle resources) {
         exit.setOnMouseClicked(event -> {
+            System.exit(0);
+        });
+        
+        exit1.setOnMouseClicked(event -> {
             System.exit(0);
         });
 
@@ -43,32 +37,32 @@ public class MainViewController implements Initializable{
         fadeTransition.setFromValue(1);
         fadeTransition.setToValue(0);
         fadeTransition.play();
-
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5),pane2);
-        translateTransition.setByX(-600);
-        translateTransition.play();
+        
+        TranslateTransition translateTransition5 = new TranslateTransition(Duration.seconds(0.5),pane2);
+        translateTransition5.setByX(-900);
+        translateTransition5.play();
 
         menu.setOnMouseClicked(event -> {
             pane1.setVisible(true);
-
-            FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.5),pane1);
+            
+            FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.01),pane1);
             fadeTransition1.setFromValue(0);
             fadeTransition1.setToValue(0.15);
             fadeTransition1.play();
-
-            TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5),pane2);
-            translateTransition1.setByX(+600);
+            
+            TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.001),pane2);
+            translateTransition1.setByX(+900);
             translateTransition1.play();
             
-            
-            TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(0.5),pane3);
-            pane3.setPrefWidth(pane3.getWidth() + 193);
-            translateTransition2.setByX(+193);
+            TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(0.001),pane3);
+            pane3.setPrefWidth(pane3.getWidth() + 90);
+            translateTransition2.setByX( + 90);
             translateTransition2.play();
         });
 
         pane1.setOnMouseClicked(event -> {
-            FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.5),pane1);
+        	
+            FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.01),pane1);
             fadeTransition1.setFromValue(0.15);
             fadeTransition1.setToValue(0);
             fadeTransition1.play();
@@ -77,13 +71,13 @@ public class MainViewController implements Initializable{
                 pane1.setVisible(false);
             });
 
-            TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5),pane2);
-            translateTransition1.setByX(-600);
-            translateTransition1.play();
+            TranslateTransition translateTransition3 = new TranslateTransition(Duration.seconds(0.001),pane2);
+            translateTransition3.setByX(-900);
+            translateTransition3.play();
             
-            TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(0.5),pane3);
-            pane3.setPrefWidth(pane3.getWidth() - 193);
-            translateTransition2.setByX(-193);
+            TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(0.001),pane3);
+            pane3.setPrefWidth(pane3.getWidth() - 90);
+            translateTransition2.setByX( - 90);
             translateTransition2.play();
         });
     }

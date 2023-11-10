@@ -2,19 +2,13 @@ package util;
 
 import java.io.IOException;
 import java.util.function.Consumer;
-import javafx.application.Platform;
+
 import application.Main;
-import javafx.animation.FadeTransition;
-import javafx.animation.SequentialTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.util.Duration;
-import util.Alerts;
 
 public class LoadView {
 	public synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction, AnchorPane ancorPane) {

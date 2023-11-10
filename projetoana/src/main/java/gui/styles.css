@@ -18,6 +18,10 @@
 	-fx-background-color: white;
 }
 
+.fundo {
+	-fx-background-color: #C3C3C3;
+}
+
 .botoes {
 	-fx-background-color: #002D40; 
 	-fx-text-fill: white;

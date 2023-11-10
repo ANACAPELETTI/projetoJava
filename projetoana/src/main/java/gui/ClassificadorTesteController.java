@@ -33,6 +33,7 @@ public class ClassificadorTesteController {
 	Classificador classificador = new Classificador();
 	Kernels kernelNovo = new Kernels();
 	LoadView loadView = new LoadView();
+	
 	@FXML
 	AnchorPane anchorPane;
 	
@@ -86,12 +87,13 @@ public class ClassificadorTesteController {
 				String resultado = String.valueOf(classificador.classifica(resultadoFeedfoward, 0));
 				
 				loadView.loadView("/gui/Resultado.fxml", (ResultadoController controller) -> {
-					controller.imagemView.setImage(imagem);
-					controller.imagemView.setFitWidth(imagem.getWidth());
-					controller.imagemView.setFitHeight(imagem.getHeight());
-					controller.texto.setText(resultado);
-					//controller.scrollPane.setPrefWidth()
-				}, anchorPane);
+			        controller.setPane3(anchorPane); // Certifique-se de que este método existe em ResultadoController
+			        controller.imagemView.setImage(imagem);
+			        controller.imagemView.setFitWidth(imagem.getWidth());
+			        controller.imagemView.setFitHeight(imagem.getHeight());
+			        controller.texto.setText(resultado);
+			        //controller.scrollPane.setPrefWidth()
+			    }, anchorPane);
 				System.out.println(classificador.classifica(resultadoFeedfoward, 0));
 			} catch (FileNotFoundException e) {
 				System.out.println("Teste");
@@ -143,12 +145,13 @@ public class ClassificadorTesteController {
 				String resultado = String.valueOf(classificador.classifica(resultadoFeedfoward, 0));
 				
 				loadView.loadView("/gui/Resultado.fxml", (ResultadoController controller) -> {
-					controller.imagemView.setImage(imagem);
-					controller.imagemView.setFitWidth(imagem.getWidth());
-					controller.imagemView.setFitHeight(imagem.getHeight());
-					controller.texto.setText(resultado);
-					//controller.scrollPane.setPrefWidth()
-				}, anchorPane);
+			        controller.setPane3(anchorPane); // Certifique-se de que este método existe em ResultadoController
+			        controller.imagemView.setImage(imagem);
+			        controller.imagemView.setFitWidth(imagem.getWidth());
+			        controller.imagemView.setFitHeight(imagem.getHeight());
+			        controller.texto.setText(resultado);
+			        //controller.scrollPane.setPrefWidth()
+			    }, anchorPane);
 				
 				System.out.println(classificador.classifica(resultadoFeedfoward, 0));
 				

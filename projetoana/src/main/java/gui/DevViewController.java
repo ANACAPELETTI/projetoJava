@@ -1,20 +1,11 @@
 package gui;
 
-import java.io.IOException;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class DevViewController {
 	@FXML
@@ -24,35 +15,37 @@ public class DevViewController {
 	GridPane matrizConfusao = new GridPane();
 	
 	@FXML
-	public void criarMatrizConfusao() {
-		Label texto = new Label();
-		texto.setText("Opa");
-		Label texto1 = new Label();
-		texto1.setText("Opa2");
-		Label texto2 = new Label();
-		texto2.setText("Opa3");
-		matrizConfusao.addColumn(0, texto);
-		matrizConfusao.addColumn(1, texto1);
-		matrizConfusao.addColumn(2, texto2);
-		
-		matrizConfusao.getColumnConstraints().clear();
-		ColumnConstraints colResultados = new ColumnConstraints();
-		colResultados.setFillWidth(false);
-		colResultados.setMinWidth(50);
-		colResultados.setMaxWidth(50);
-		colResultados.setHalignment(HPos.CENTER);
-		RowConstraints rowResultados = new RowConstraints();
-		rowResultados.setMinHeight(50);
-		rowResultados.setMaxHeight(50);
-		rowResultados.setValignment(VPos.CENTER);
-		matrizConfusao.getColumnConstraints().add(colResultados);
-		matrizConfusao.getColumnConstraints().add(colResultados);
-		matrizConfusao.getColumnConstraints().add(colResultados);
-		
-		matrizConfusao.getRowConstraints().clear();
-		
-		matrizConfusao.getRowConstraints().add(rowResultados);
-		matrizConfusao.getRowConstraints().add(rowResultados);
-		matrizConfusao.getRowConstraints().add(rowResultados);
-	}
+    public void criarMatrizConfusao() {
+        // Chame o método para criar e exibir a matriz durante a inicialização da interface
+        exibirMatriz();
+    }
+	
+	private int[][] matriz = {
+	            {1, 2, 3, 4},
+	            {5, 6, 7, 8},
+	            {9, 10, 11, 12},
+	            {13, 14, 15, 16}
+	};
+	 
+	double larguraFixa = 40.0;
+
+    private void exibirMatriz() {
+        // Limpe o GridPane antes de criar uma nova matriz
+    	matrizConfusao.getChildren().clear();
+
+        // Obtenha o número de linhas e colunas da matriz
+        int linhas = matriz.length;
+        int colunas = matriz[0].length;
+
+        // Use loops para percorrer a matriz e exibir os valores no GridPane
+        for (int linha = 0; linha < linhas; linha++) {
+            for (int coluna = 0; coluna < colunas; coluna++) {
+                Label label = new Label(String.valueOf(matriz[linha][coluna]));
+                label.setMinWidth(larguraFixa);
+                label.setMinHeight(larguraFixa);
+                label.setStyle("-fx-alignment: CENTER;"); // Alinha o texto ao centro
+                matrizConfusao.add(label, coluna, linha);
+            }
+        }
+    }
 }
