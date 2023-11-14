@@ -14,7 +14,6 @@ import functions.ImageReader;
 import functions.Import;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -52,7 +51,7 @@ public class ClassificadorTesteController {
 	public void selectFile() {
 		String caminho = "";
 		
-		ExtensionFilter image = new ExtensionFilter("Imagem (*.png)", "*.png");
+		ExtensionFilter image = new ExtensionFilter("Imagem (*.png)", "*.png", "*.jfif");
 		FileChooser fileChooser = new FileChooser();
 
 		fileChooser.getExtensionFilters().addAll(image);
@@ -88,11 +87,7 @@ public class ClassificadorTesteController {
 				
 				loadView.loadView("/gui/Resultado.fxml", (ResultadoController controller) -> {
 			        controller.setPane3(anchorPane); // Certifique-se de que este método existe em ResultadoController
-			        controller.imagemView.setImage(imagem);
-			        controller.imagemView.setFitWidth(imagem.getWidth());
-			        controller.imagemView.setFitHeight(imagem.getHeight());
-			        controller.texto.setText(resultado);
-			        //controller.scrollPane.setPrefWidth()
+			        controller.init(imagem, resultado);
 			    }, anchorPane);
 				System.out.println(classificador.classifica(resultadoFeedfoward, 0));
 			} catch (FileNotFoundException e) {
@@ -146,11 +141,7 @@ public class ClassificadorTesteController {
 				
 				loadView.loadView("/gui/Resultado.fxml", (ResultadoController controller) -> {
 			        controller.setPane3(anchorPane); // Certifique-se de que este método existe em ResultadoController
-			        controller.imagemView.setImage(imagem);
-			        controller.imagemView.setFitWidth(imagem.getWidth());
-			        controller.imagemView.setFitHeight(imagem.getHeight());
-			        controller.texto.setText(resultado);
-			        //controller.scrollPane.setPrefWidth()
+			        controller.init(imagem, resultado);
 			    }, anchorPane);
 				
 				System.out.println(classificador.classifica(resultadoFeedfoward, 0));

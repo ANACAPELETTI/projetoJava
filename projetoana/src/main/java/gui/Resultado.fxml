@@ -30,13 +30,13 @@
                         </Label>
                         <HBox prefHeight="132.0" prefWidth="446.0">
                            <children>
-                              <VBox prefHeight="138.0" prefWidth="450.0">
+                              <VBox alignment="CENTER" prefHeight="138.0" prefWidth="450.0">
                                  <children>
-                                    <ScrollPane fx:id="scrollPane" prefHeight="138.0" prefWidth="458.0" styleClass="lugarTextoEImagemOriginal" stylesheets="@styles.css">
-                                       <content>
-                                          <ImageView fx:id="imagemView" fitHeight="121.0" fitWidth="439.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: white;" />
-                                       </content>
-                                    </ScrollPane>
+                                    <HBox alignment="CENTER" style="-: white;">
+                                       <children>
+                                          <ImageView fx:id="imagemView" fitHeight="121.0" fitWidth="439.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: white;" />
+                                       </children>
+                                    </HBox>
                                  </children>
                                  <opaqueInsets>
                                     <Insets />

@@ -32,83 +32,85 @@ public class ResultadoController {
 	Import importe = new Import();
 	Classificador classificador = new Classificador();
 	Kernels kernelNovo = new Kernels();
-	
+
 	@FXML
-    private AnchorPane pane3;
-	
+	private AnchorPane pane3;
+
 	public void setPane3(AnchorPane pane3) {
-        this.pane3 = pane3;
-    }
-	
+		this.pane3 = pane3;
+	}
+
 	@FXML
 	Button btReiniciar;
-	
+
 	@FXML
 	Button btCopiar = new Button();
-	
+
 	@FXML
 	Button btExportar = new Button();
-	
+
 	@FXML
 	GridPane grid = new GridPane();
-	
+
 	@FXML
 	ImageView imagemView = new ImageView();
-	
+
 	@FXML
 	ScrollPane scrollPane = new ScrollPane();
-	
+
 	@FXML
 	Label texto = new Label();
-	
+
 	public void init(Image image, String textoResultado) {
-		imagemView.setImage(image);
+		Image novaImagem = new Image(image.getUrl(), 121, 121, false, false);
+		imagemView.setImage(novaImagem);
 		texto.setText(textoResultado);
+		imagemView.setPreserveRatio(true);
 	}
-	
+
 	@FXML
-	public void Reiniciar () {
+	public void Reiniciar() {
 		LoadView loadView = new LoadView();
-	    loadView.loadView("/gui/ClassificadorTeste.fxml", (ClassificadorTesteController controller) -> {
-	        controller.setAnchorPane(pane3);
-	    }, pane3);
+		loadView.loadView("/gui/ClassificadorTeste.fxml", (ClassificadorTesteController controller) -> {
+			controller.setAnchorPane(pane3);
+		}, pane3);
 	}
-	
+
 	@FXML
-    public void copiarTexto() {
-        String textoParaCopiar = texto.getText();
-        Clipboard clipboard = Clipboard.getSystemClipboard();
-        ClipboardContent content = new ClipboardContent();
-        content.putString(textoParaCopiar);
-        clipboard.setContent(content);
-        System.out.println("Texto copiado para a área de transferência: " + textoParaCopiar);
-    }
-	
+	public void copiarTexto() {
+		String textoParaCopiar = texto.getText();
+		Clipboard clipboard = Clipboard.getSystemClipboard();
+		ClipboardContent content = new ClipboardContent();
+		content.putString(textoParaCopiar);
+		clipboard.setContent(content);
+		System.out.println("Texto copiado para a área de transferência: " + textoParaCopiar);
+	}
+
 	@FXML
-    public void exportarTexto() {
-        String textoParaExportar = texto.getText();
+	public void exportarTexto() {
+		String textoParaExportar = texto.getText();
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Salvar Arquivo Texto");
-        fileChooser.getExtensionFilters().add(new ExtensionFilter("Arquivos de Texto (*.txt)", "*.txt"));
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Salvar Arquivo Texto");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("Arquivos de Texto (*.txt)", "*.txt"));
 
-        String nomePadrao = "TextoExportado.txt";
-        fileChooser.setInitialFileName(nomePadrao);
-        
-        File file = fileChooser.showSaveDialog(null);
+		String nomePadrao = "TextoExportado.txt";
+		fileChooser.setInitialFileName(nomePadrao);
 
-        if (file != null) {
-            salvarTextoNoArquivo(textoParaExportar, file);
-            System.out.println("Texto exportado para o arquivo: " + file.getAbsolutePath());
-        }
-    }
+		File file = fileChooser.showSaveDialog(null);
 
-    private void salvarTextoNoArquivo(String texto, File file) {
-        try (FileWriter writer = new FileWriter(file)) {
-            writer.write(texto);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		if (file != null) {
+			salvarTextoNoArquivo(textoParaExportar, file);
+			System.out.println("Texto exportado para o arquivo: " + file.getAbsolutePath());
+		}
+	}
+
+	private void salvarTextoNoArquivo(String texto, File file) {
+		try (FileWriter writer = new FileWriter(file)) {
+			writer.write(texto);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

@@ -11,16 +11,16 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DevViewController">
    <children>
-      <VBox prefHeight="381.0" prefWidth="522.0">
+      <VBox alignment="CENTER" prefHeight="366.0" prefWidth="420.0">
          <children>
             <Button fx:id="botao" mnemonicParsing="false" onAction="#criarMatrizConfusao" styleClass="botoes" stylesheets="@styles.css" text="Button">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <ScrollPane prefHeight="345.0">
+            <ScrollPane prefHeight="329.0" prefWidth="420.0">
                <content>
-                  <VBox>
+                  <VBox alignment="CENTER">
                      <children>
                         <GridPane fx:id="matrizConfusao" alignment="CENTER">
                            <columnConstraints>
@@ -29,6 +29,9 @@
                            <rowConstraints>
                               <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </GridPane>
                      </children>
                   </VBox>
