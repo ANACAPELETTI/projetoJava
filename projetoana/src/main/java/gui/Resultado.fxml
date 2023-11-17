@@ -14,9 +14,9 @@
 
 <AnchorPane prefHeight="484.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ResultadoController">
    <children>
-      <AnchorPane>
+      <AnchorPane prefHeight="392.0" prefWidth="446.0">
          <children>
-            <Pane prefHeight="382.0" prefWidth="446.0">
+            <Pane prefHeight="392.0" prefWidth="446.0">
                <children>
                   <VBox prefHeight="160.0" prefWidth="446.0">
                      <children>
@@ -28,15 +28,19 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <HBox prefHeight="132.0" prefWidth="446.0">
+                        <HBox prefHeight="144.0" prefWidth="446.0">
                            <children>
-                              <VBox alignment="CENTER" prefHeight="138.0" prefWidth="450.0">
+                              <VBox alignment="CENTER" prefHeight="144.0" prefWidth="445.0">
                                  <children>
-                                    <HBox alignment="CENTER" style="-: white;">
-                                       <children>
-                                          <ImageView fx:id="imagemView" fitHeight="121.0" fitWidth="439.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: white;" />
-                                       </children>
-                                    </HBox>
+                                    <ScrollPane maxHeight="144.0" maxWidth="450.0" minHeight="144.0" minWidth="424.0" prefHeight="144.0" prefWidth="424.0" style="-fx-background-color: transparent;">
+                                       <content>
+                                          <HBox alignment="CENTER" minHeight="140.0" minWidth="437.0" style="-: white;">
+                                             <children>
+                                                <ImageView fx:id="imagemView" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: white;" />
+                                             </children>
+                                          </HBox>
+                                       </content>
+                                    </ScrollPane>
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
@@ -54,9 +58,9 @@
                   </VBox>
                   <VBox layoutY="169.0" prefHeight="216.0" prefWidth="446.0">
                      <children>
-                        <Label text="Texto Classificado:">
+                        <Label text="Texto classificado:">
                            <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" top="5.0" />
+                              <Insets bottom="5.0" left="5.0" top="10.0" />
                            </VBox.margin>
                            <font>
                               <Font size="14.0" />
@@ -67,7 +71,7 @@
                               <Insets left="5.0" />
                            </VBox.margin>
                            <content>
-                              <Label fx:id="texto" alignment="CENTER" prefHeight="140.0" prefWidth="439.0" styleClass="lugarTextoEImagemOriginal" stylesheets="@styles.css">
+                              <Label fx:id="texto" alignment="CENTER" prefHeight="136.0" prefWidth="439.0" styleClass="lugarTextoEImagemOriginal" stylesheets="@styles.css">
                                  <padding>
                                     <Insets left="5.0" />
                                  </padding>
@@ -103,6 +107,9 @@
                            </VBox.margin>
                         </HBox>
                      </children>
+                     <padding>
+                        <Insets top="4.0" />
+                     </padding>
                   </VBox>
                </children>
             </Pane>

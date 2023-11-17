@@ -16,6 +16,12 @@ public class DevViewController {
 	Button botao = new Button();
 	
 	@FXML
+	Label labelVertical = new Label();
+	
+	@FXML
+	Label labelHorizontal = new Label();
+	
+	@FXML
 	GridPane matrizConfusao = new GridPane();
 	
 	@FXML
@@ -23,6 +29,7 @@ public class DevViewController {
         // Chame o método para criar e exibir a matriz durante a inicialização da interface
         exibirMatriz();
     }
+	
 	
 	private int[][] matriz = {
 	            {1, 2, 3, 4, 5}, 
@@ -35,6 +42,8 @@ public class DevViewController {
 	double larguraFixa = 40.0;
 
 	private void exibirMatriz() {
+		labelVertical.setVisible(true);
+        labelHorizontal.setVisible(true);
         // Limpe o GridPane antes de criar uma nova matriz
         matrizConfusao.getChildren().clear();
         matrizConfusao.getColumnConstraints().clear();

@@ -12,6 +12,7 @@ import feedfoward.Feedfoward;
 import functions.Classificador;
 import functions.ImageReader;
 import functions.Import;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -69,27 +70,15 @@ public class ClassificadorTesteController {
 				listImageMatriz.add(imageMatriz);
 				Image imagem = new Image(selectedFile.getAbsolutePath());
 				
-				int[] pooling1 = {1, 2}; //pooling mínimo, com tamanho 2
-				int[] pooling2 = {2, 2}; //pooling médio, com tamanho 2
-				int[] pooling3 = {3, 2}; //pooling máximo, com tamanho 2
-				
-				List<int[]> listaPoolings = new ArrayList<int[]>(Arrays.asList(pooling1, pooling1, pooling1, pooling1));
-				feedfowardEntity.setListaPoolings(listaPoolings);
-				
-				List<Integer> listaOrdemOperacoes = new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 0, 0));
-				List<List<List<float[][]>>> kernels = new ArrayList<List<List<float[][]>>>();
-				
-				kernels.add(kernelNovo.listaDeMatrizes());
-				
-				float resultadoFeedfoward = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz, kernels.get(0), listaPoolings);
-				
-				String resultado = String.valueOf(classificador.classifica(resultadoFeedfoward, 0));
-				
 				loadView.loadView("/gui/Resultado.fxml", (ResultadoController controller) -> {
-			        controller.setPane3(anchorPane); // Certifique-se de que este método existe em ResultadoController
-			        controller.init(imagem, resultado);
-			    }, anchorPane);
-				System.out.println(classificador.classifica(resultadoFeedfoward, 0));
+	                controller.setPane3(anchorPane);
+	                controller.setImage(imagem);
+
+	                Platform.runLater(() -> {
+	                    System.out.println("Chama classifica texto");
+	                    classificaTexto(anchorPane, listImageMatriz, imagem);
+	                });
+	            }, anchorPane);
 			} catch (FileNotFoundException e) {
 				System.out.println("Teste");
 			}
@@ -122,6 +111,11 @@ public class ClassificadorTesteController {
 				listImageMatriz.add(imageMatriz);
 				Image imagem = new Image(file2.getAbsolutePath());
 				
+				/*loadView.loadView("/gui/Resultado.fxml", (ResultadoController controller) -> {
+			        controller.setPane3(anchorPane);
+			        controller.setImage(imagem);
+			    }, anchorPane);*/
+				
 				int[] pooling1 = {1, 2}; //pooling mínimo, com tamanho 2
 				int[] pooling2 = {2, 2}; //pooling médio, com tamanho 2
 				int[] pooling3 = {3, 2}; //pooling máximo, com tamanho 2
@@ -139,10 +133,10 @@ public class ClassificadorTesteController {
 				
 				String resultado = String.valueOf(classificador.classifica(resultadoFeedfoward, 0));
 				
-				loadView.loadView("/gui/Resultado.fxml", (ResultadoController controller) -> {
+				/*loadView.loadView("/gui/Resultado.fxml", (ResultadoController controller) -> {
 			        controller.setPane3(anchorPane); // Certifique-se de que este método existe em ResultadoController
-			        controller.init(imagem, resultado);
-			    }, anchorPane);
+			        controller.setText(resultado);
+			    }, anchorPane);*/
 				
 				System.out.println(classificador.classifica(resultadoFeedfoward, 0));
 				
@@ -152,5 +146,32 @@ public class ClassificadorTesteController {
 				System.out.println("Teste");
 			}
 		}
+	}
+	
+	public void classificaTexto(AnchorPane anchorPane, List<float[][]> listImageMatriz, Image imagem) {
+		System.out.println("Classifica texto");
+		int[] pooling1 = {1, 2}; //pooling mínimo, com tamanho 2
+		int[] pooling2 = {2, 2}; //pooling médio, com tamanho 2
+		int[] pooling3 = {3, 2}; //pooling máximo, com tamanho 2
+		
+		List<int[]> listaPoolings = new ArrayList<int[]>(Arrays.asList(pooling1, pooling1, pooling1, pooling1));
+		feedfowardEntity.setListaPoolings(listaPoolings);
+		
+		List<Integer> listaOrdemOperacoes = new ArrayList<Integer>(Arrays.asList(0, 1, 0, 1, 0, 0));
+		List<List<List<float[][]>>> kernels = new ArrayList<List<List<float[][]>>>();
+		
+		kernels.add(kernelNovo.listaDeMatrizes());
+		
+		float resultadoFeedfoward = feedfoward.feedfoward(listaOrdemOperacoes, listImageMatriz, kernels.get(0), listaPoolings);
+		
+		String resultado = String.valueOf(classificador.classifica(resultadoFeedfoward, 0));
+		
+	        loadView.loadView("/gui/Resultado.fxml", (ResultadoController controller) -> {
+	            controller.setPane3(anchorPane);
+	            controller.setImage(imagem);
+	            System.out.println("Chamando setText");
+	            controller.setText(resultado); // Certifique-se de chamar o método correto para setar o texto
+	        }, anchorPane);
+		System.out.println(classificador.classifica(resultadoFeedfoward, 0));
 	}
 }

@@ -39,6 +39,10 @@ public class ResultadoController {
 	public void setPane3(AnchorPane pane3) {
 		this.pane3 = pane3;
 	}
+	
+	public AnchorPane getPane3() {
+		return this.pane3;
+	}
 
 	@FXML
 	Button btReiniciar;
@@ -61,11 +65,15 @@ public class ResultadoController {
 	@FXML
 	Label texto = new Label();
 
-	public void init(Image image, String textoResultado) {
-		Image novaImagem = new Image(image.getUrl(), 121, 121, false, false);
-		imagemView.setImage(novaImagem);
-		texto.setText(textoResultado);
+	public void setImage(Image image) {
+		imagemView.setImage(image);
 		imagemView.setPreserveRatio(true);
+		System.out.println("Imagem setada");
+	}
+	
+	public void setText(String textoResultado) {
+		texto.setText(textoResultado);
+		System.out.println("Texto inserido");
 	}
 
 	@FXML
